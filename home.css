@@ -46,7 +46,7 @@
                (no ambient glow drift, no sheen sweeps, smaller glass blur).
      RULE      No ad-hoc spacing, font-size or radius values: tokens only. Exempt (art / hairlines, not layout): 1 to 3px borders and
                outlines, shadows and blur, gradient stops, blob and watermark geometry, logo crop offsets, container-unit (cqi)
-               sizes inside the HTML/CSS PDF cover, icon and avatar box sizes, and the .mockup-tool block (removed in Smarty).
+               sizes inside the HTML/CSS PDF cover, icon and avatar box sizes.
 
    GROUP D (about, team, capabilities, CTA, footer): founder frame .about__frame, vertical team carousel .team-v (JS), document showcase (.seg tabs + .docshow + HTML/CSS PDF cover .doc) + full-width sector strip,
      how-we-work photo steps (.flow, image slots with placeholder),
@@ -54,6 +54,11 @@
 
    v3.1 (this iteration): hero + how-we-work options resolved (current versions kept). How-we-work = progress rail .flowrail + image-led
      cards .flow__card (section 16); featured project panel = real frosted glass (section 24); CTA ambient = .cta__glow/.cta__grid/.cta__shape (section 17b).
+
+   v3.3 (strategic review): hero thumbnails, stat notes and the quote strip are gone; new .clients strip (grey tiles, marquee only on overflow),
+     .about__lic badge row, .svc-foot (the only quote button of the services), .cta__info rows, phone contact bar .mbar (replaces the floating
+     WhatsApp button; --mbar-h). Ember (.btn--primary) is used ONLY for "Request a quote": header, hero, under services, CTA (the mobile menu repeats the header one).
+     Every other button is .btn--secondary / .btn--ghost / .btn--glass / .btn--outline-light.
 
    COMPONENTS
      Buttons   .btn + .btn--primary (pill, --btn-grad + --btn-fg, inner top highlight, warm glow; hover = 2px lift +
@@ -194,6 +199,7 @@
   --display-xl: 10.5rem;  /* 168px: decorative big number (desktop) */
 
   /* Small fixed sizes and optical offsets */
+  --mbar-h: calc(var(--btn-h) + var(--s2)); /* phone contact bar: 48px buttons + 8px above and below */
   --hit-sm: 44px;         /* small tap target */
   --nudge-1: 1px; --nudge-2: 2px; --nudge-3: 3px; --nudge-4: 4px; --nudge-6: 6px;
 }
@@ -219,7 +225,7 @@ h3 { font-size: var(--fs-h3); }
 html[lang="en"] h1, html[lang="en"] h2 { letter-spacing: -.015em; line-height: 1.2; }
 small { font-size: var(--fs-sm); }
 p { margin: 0; text-wrap: pretty; }
-.section-head__lead, .cta__lead, .hero__lead, .qstrip__text { text-wrap: balance; }
+.section-head__lead, .cta__lead, .hero__lead { text-wrap: balance; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 a { color: var(--action); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 a:hover { color: var(--action-hover); }
@@ -278,10 +284,6 @@ main:focus { outline: none; }
 .btn--light:hover { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-2); transform: translateY(-1px); }
 .btn:not(.btn--primary):active { transform: translateY(0); }
 .btn-row { display: flex; flex-wrap: wrap; gap: var(--s2); }
-/* Disabled "coming soon" button (PDF not uploaded yet): muted, no lift, no sheen. aria-disabled keeps it focusable and announced. */
-.btn--primary.btn--soon, .btn--primary.btn--soon:hover, .btn--primary.btn--soon:focus-visible, .btn--primary.btn--soon:active { background: var(--surface); border-color: var(--line); color: var(--ink-soft); box-shadow: none; transform: none; cursor: not-allowed; }
-.btn--soon::after { display: none; }
-.btn--soon .icon--duo { color: var(--muted); }
 
 .link-arrow { display: inline-flex; align-items: center; gap: var(--s1); min-height: 48px; font-weight: 500; text-decoration: none; color: var(--action); }
 .link-arrow:hover { text-decoration: underline; }
@@ -341,13 +343,6 @@ main:focus { outline: none; }
 .eyebrow::before { content: ""; width: 24px; height: 2px; border-radius: var(--r-pill); background: var(--brand); }
 .eyebrow--light { color: var(--on-ink-muted); }
 
-/* ---------- 4. Mockup-only tools (NOT part of the final site) ---------- */
-.mockup-tool { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1); padding: var(--s2); border: 2px dashed #8A7F78; border-radius: var(--radius); background: #FFFBE6; font-size: var(--fs-sm); color: var(--ink); }
-.mockup-tool__tag { flex-basis: 100%; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .02em; color: #6B4E00; }
-.mockup-tool__label { font-weight: 600; }
-.mockup-tool__btn { min-height: 40px; padding: var(--s1) var(--s2); border: 1px solid #8A7F78; border-radius: var(--r-sm); background: var(--white); cursor: pointer; font-size: var(--fs-sm); }
-.mockup-tool__btn[aria-pressed="true"] { background: var(--ink); color: var(--white); border-color: var(--ink); }
-
 /* ---------- 5. Header ---------- */
 .site-header { position: sticky; inset-block-start: calc(-1 * var(--topbar-h)); z-index: 50; background: var(--white); }
 .site-header.is-scrolled .mainbar { box-shadow: var(--shadow); }
@@ -391,22 +386,53 @@ html:not(.js) .nav-panel { display: block; order: 10; width: 100%; } /* no-JS fa
   .logo { height: 42px; } .logo img { height: 67px; margin-block-start: -11px; }
   .menu-toggle, .nav-panel__extra { display: none; }
   .nav-panel, html:not(.js) .nav-panel { display: block; order: 0; width: auto; margin-inline-start: auto; }
-  .nav__list { display: flex; gap: var(--s05); }
-  .nav__list a { position: relative; min-height: 48px; padding-inline: var(--s1); border: 0; font-size: var(--fs-sm); font-weight: 500; }
-  .nav__list a::after { content: ""; position: absolute; inset-inline: var(--s1); inset-block-end: var(--nudge-6); height: 2px; background: var(--brand); transform: scaleX(0); transition: transform var(--t); }
-  .nav__list a:hover { color: var(--action); }
-  .nav__list a:hover::after, .nav__list a[aria-current="page"]::after { transform: scaleX(1); }
-  .nav__list a[aria-current="page"] { color: var(--ink); font-weight: 600; }
   .mainbar__actions { margin-inline-start: var(--s2); }
   .btn--quote { min-height: 48px; padding: var(--s1) var(--s3); font-size: var(--fs-body); }
 }
-@media (min-width: 1280px) { .nav__list a { padding-inline: var(--s2); } .nav__list a::after { inset-inline: var(--s2); } }
+
+/* ---------- 5b. Desktop nav (>= 1024px): sliding Ember indicator. Mobile menu above is untouched.
+   Common: links 44px (--hit-sm) high, current page = aria-current, hover/focus-visible states, 
+   Sliding element .nav__ind is created by home.js; it only moves with transform/width (physical left: 0 on purpose, JS measures
+   physical rects, so it is correct in RTL and LTR). Without JS the current page keeps a static mark. ---------- */
+.nav__ind { display: none; }
+@media (min-width: 1024px) {
+  .nav { position: relative; isolation: isolate; }
+  .nav__list { display: flex; }
+  .nav__list a { position: relative; z-index: 1; gap: var(--s1); min-height: var(--hit-sm); padding-inline: var(--s1); border: 0; border-radius: var(--r-pill); font-size: var(--fs-sm); font-weight: 500; color: var(--ink-soft); white-space: nowrap; transition: color var(--t), background-color var(--t); }
+  .nav__list a:hover, .nav__list a:focus-visible { color: var(--ink); }
+  .nav__list a:focus-visible { outline-offset: calc(-1 * var(--nudge-3)); }
+  .nav__ind { display: block; position: absolute; left: 0; top: 0; z-index: 0; width: var(--iw, 0); height: var(--lh, 0); opacity: 0; pointer-events: none; transform: translate3d(var(--ix, 0), var(--iy, 0), 0); }
+  .nav__ind.is-ready { opacity: 1; }
+  .nav__ind.is-anim { transition: transform var(--dur-fast) var(--ease), width var(--dur-fast) var(--ease), height var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease); }
+  html:not(.js) .nav__list a[aria-current="page"] { color: var(--action); box-shadow: inset 0 calc(-1 * var(--nudge-3)) 0 var(--brand); }
+
+  /* Sliding Ember indicator (chosen style): minimal links + a 3px line that slides to the hovered/current link */
+  .nav__list { gap: var(--s05); }
+  .nav__list a { border-radius: var(--r-sm); }
+  .nav__ind { --bh: 3px; height: var(--bh); border-radius: var(--r-pill); background: var(--btn-grad); transform: translate3d(var(--ix, 0), calc(var(--iy, 0px) + var(--lh, 0px) - var(--bh) - var(--nudge-3)), 0); }
+  .nav__list a[aria-current="page"] { color: var(--ink); font-weight: var(--fw-strong); }
+
+  /* Common: on scroll the bar becomes a compact glass bar. The header box keeps its height (no layout jump): only the visible bar shrinks. */
+  .mainbar { position: relative; height: var(--header-h); border-block-end: 0; background: transparent; }
+  .mainbar::before { content: ""; position: absolute; inset-inline: 0; inset-block-start: 0; z-index: 0; height: var(--header-h); border-block-end: 1px solid var(--line); background: var(--white); transition: height var(--t), background-color var(--t), box-shadow var(--t); }
+  .mainbar__inner { position: relative; z-index: 1; transition: height var(--t); }
+  .site-header.is-scrolled { background: transparent; }
+  .site-header.is-scrolled .mainbar { pointer-events: none; box-shadow: none; }
+  .site-header.is-scrolled .mainbar__inner { height: calc(var(--header-h) - var(--s2)); pointer-events: auto; }
+  .site-header.is-scrolled .mainbar::before { height: calc(var(--header-h) - var(--s2)); background: var(--gl-solid); box-shadow: var(--shadow-1); }
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .site-header.is-scrolled .mainbar::before { background: var(--gl-fill); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
+  }
+}
+@media (min-width: 1280px) { .nav__list a { padding-inline: var(--s2); } }
+@media (prefers-reduced-motion: reduce) { .nav__ind.is-anim, .nav__list a, .mainbar::before, .mainbar__inner { transition: none; } }
+html.motion-paused .nav__ind.is-anim, html.motion-paused .mainbar::before, html.motion-paused .mainbar__inner { transition: none; }
 
 /* ---------- 6. Hero (v3): cinematic full-bleed slideshow + glass project navigator ----------
    Stage: slides stacked; .is-active shows. Without GSAP (or JS) it is a CSS crossfade.
    With GSAP (.hero--motion): layered diagonal mask reveal (ink veil, then the next photo) + slow scale.
    --hero-overlap = how far the stat cards (section 7) sit over the hero's bottom edge. */
-.hero { --hero-overlap: 48px; position: relative; isolation: isolate; display: flex; min-height: max(560px, 78vh); min-height: max(560px, 78svh); overflow: hidden; background: var(--ink); color: var(--white); }
+.hero { --hero-overlap: 48px; position: relative; isolation: isolate; display: flex; min-height: max(560px, 72vh); min-height: max(560px, 72svh); overflow: hidden; background: var(--ink); color: var(--white); }
 .hero__stage { position: absolute; inset: 0; z-index: -2; overflow: hidden; background: var(--ink); }
 .hero__slide { position: absolute; inset: 0; z-index: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: opacity 900ms var(--ease), visibility 0s linear 900ms; }
 .hero__slide.is-active { z-index: 1; opacity: 1; visibility: visible; transition: opacity 900ms var(--ease), visibility 0s; }
@@ -417,11 +443,12 @@ html:not(.js) .nav-panel { display: block; order: 10; width: 100%; } /* no-JS fa
 .hero--motion .hero__slide.is-entering { z-index: 3; visibility: visible; }
 .hero--motion .hero__slide.is-leaving { visibility: visible; }
 
-/* Shade: strong at the bottom (text + card), soft at the top (header contrast). */
-.hero__shade { position: absolute; inset: 0; z-index: -1; pointer-events: none; background:
-  linear-gradient(to top, rgba(24, 23, 23, .94) 0%, rgba(24, 23, 23, .72) 34%, rgba(24, 23, 23, .28) 66%, rgba(24, 23, 23, .40) 100%); }
+/* Shade (phones, tablets): even ink wash, strongest at the bottom, so white text is >= 4.5:1 even on a white photo. Desktop (>= 1024px): directional gradient from the text side, see below. */
+.hero__shade { --shade-x: 50%; position: absolute; inset: 0; z-index: -1; pointer-events: none; background:
+  radial-gradient(100% 70% at var(--shade-x) 66%, rgba(24, 23, 23, .6), rgba(24, 23, 23, 0) 80%),
+  linear-gradient(to top, rgba(24, 23, 23, .95) 0%, rgba(24, 23, 23, .88) 36%, rgba(24, 23, 23, .74) 62%, rgba(24, 23, 23, .56) 100%); }
 
-.hero__inner { position: relative; display: grid; align-content: end; gap: var(--s4); padding-block: var(--s8) calc(var(--hero-overlap) + var(--s3)); }
+.hero__inner { position: relative; display: grid; align-content: end; gap: var(--s4); padding-block: var(--s6) calc(var(--hero-overlap) + var(--s3)); }
 
 /* Intro text */
 .hero__text { max-width: 680px; }
@@ -476,11 +503,11 @@ html[lang="en"] .hero__title { line-height: 1.12; letter-spacing: -.02em; }
 .hero__ring-bar { stroke: var(--white); stroke-linecap: round; stroke-dasharray: 138.23; stroke-dashoffset: calc(138.23 * (1 - var(--ring, 0))); }
 .hero__toggle .is-play, .hero__toggle.is-paused .is-pause { display: none; }
 .hero__toggle.is-paused .is-play { display: block; }
-.hero__thumbs { display: none; }
-html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__count { display: none !important; } /* no JS: first slide + card only */
+html:not(.js) .hero__buttons, html:not(.js) .hero__count { display: none !important; } /* no JS: first slide + card only */
 
 @media (min-width: 768px) {
-  .hero { --hero-overlap: 64px; }
+  .hero__inner { padding-block-start: var(--s8); }
+  .hero { --hero-overlap: 64px; min-height: max(560px, 70vh); min-height: max(560px, 70svh); }
 
   .hero__lead { font-size: var(--fs-lead); }
   .hero-card { grid-template-columns: 88px minmax(0, 1fr); padding: var(--s2); }
@@ -488,45 +515,39 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
   .hero__nav { max-width: 560px; }
 }
 @media (min-width: 1024px) {
-  .hero { --hero-overlap: 72px; min-height: max(620px, calc(100vh - var(--header-h) - var(--topbar-h))); min-height: max(620px, calc(100svh - var(--header-h) - var(--topbar-h))); }
-  .hero__shade { background:
-    linear-gradient(to top, rgba(24, 23, 23, .9) 0%, rgba(24, 23, 23, .45) 40%, rgba(24, 23, 23, .1) 70%, rgba(24, 23, 23, .35) 100%),
-    linear-gradient(to right, rgba(24, 23, 23, .55) 0%, rgba(24, 23, 23, 0) 60%); }
-  [dir="rtl"] .hero__shade { background:
-    linear-gradient(to top, rgba(24, 23, 23, .9) 0%, rgba(24, 23, 23, .45) 40%, rgba(24, 23, 23, .1) 70%, rgba(24, 23, 23, .35) 100%),
-    linear-gradient(to left, rgba(24, 23, 23, .55) 0%, rgba(24, 23, 23, 0) 60%); }
+  .hero { --hero-overlap: 72px; min-height: clamp(560px, 80vh, 760px); min-height: clamp(560px, 80svh, 760px); }
+  /* Legibility: ink 70% at the text side (inline-start), fading to nothing by 60% of the width; soft radial glow behind the headline; light bottom and top gradients. */
+  .hero__shade { --shade-x: 28%; background:
+    radial-gradient(62% 84% at var(--shade-x) 62%, rgba(24, 23, 23, .5), rgba(24, 23, 23, 0) 75%),
+    linear-gradient(to right, rgba(24, 23, 23, .8) 0%, rgba(24, 23, 23, .7) 36%, rgba(24, 23, 23, .34) 50%, rgba(24, 23, 23, 0) 62%),
+    linear-gradient(to top, rgba(24, 23, 23, .86) 0%, rgba(24, 23, 23, .5) 36%, rgba(24, 23, 23, .16) 55%, rgba(24, 23, 23, 0) 70%),
+    linear-gradient(to bottom, rgba(24, 23, 23, .34) 0%, rgba(24, 23, 23, 0) 22%); }
+  [dir="rtl"] .hero__shade { --shade-x: 72%; background:
+    radial-gradient(62% 84% at var(--shade-x) 62%, rgba(24, 23, 23, .5), rgba(24, 23, 23, 0) 75%),
+    linear-gradient(to left, rgba(24, 23, 23, .8) 0%, rgba(24, 23, 23, .7) 36%, rgba(24, 23, 23, .34) 50%, rgba(24, 23, 23, 0) 62%),
+    linear-gradient(to top, rgba(24, 23, 23, .86) 0%, rgba(24, 23, 23, .5) 36%, rgba(24, 23, 23, .16) 55%, rgba(24, 23, 23, 0) 70%),
+    linear-gradient(to bottom, rgba(24, 23, 23, .34) 0%, rgba(24, 23, 23, 0) 22%); }
   .hero__inner { grid-template-columns: minmax(0, 1fr) minmax(360px, 420px); align-items: end; gap: var(--s6); }
   .hero__nav { max-width: none; }
-  /* Desktop: thumbnails of all projects sit above the card; counter and buttons below it. */
-  .hero__nav { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "thumbs thumbs" "card card" "count buttons"; }
+  /* Desktop: the card, then counter and buttons below it. */
+  .hero__nav { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "card card" "count buttons"; }
   .hero__controls { display: contents; }
   .hero-card { grid-area: card; }
   .hero__count { grid-area: count; align-self: center; }
   .hero__buttons { grid-area: buttons; justify-self: end; }
-  .hero__thumbs { grid-area: thumbs; display: flex; flex-wrap: wrap; justify-self: end; gap: var(--s1); }
-  .hero-thumb { display: block; width: 48px; height: 48px; padding: 0; overflow: hidden; border: 0; border-radius: var(--r-sm); background: rgba(255, 255, 255, .08); opacity: .55; cursor: pointer; outline-offset: 2px; transition: opacity var(--t), box-shadow var(--t); }
-  .hero-thumb img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-thumb:hover { opacity: .9; }
-  .hero-thumb.is-active { opacity: 1; box-shadow: 0 0 0 2px var(--ink), 0 0 0 4px var(--white); }
 }
 @media (min-width: 1280px) { .hero__inner { grid-template-columns: minmax(0, 1fr) 440px; } }
 
 /* ---------- 7. Trust numbers (v3): elevated cards overlapping the hero's bottom edge ---------- */
 .trust { --overlap: var(--s6); position: relative; z-index: 2; isolation: isolate; margin-block-start: calc(-1 * var(--overlap)); padding-block-end: 0; background: linear-gradient(to bottom, transparent var(--overlap), var(--surface) var(--overlap)); } /* lower part shares the services surface: no seam */
-/* Ambient blobs behind the glass stat cards (the upper part of each card shows the blurred hero photo). */
-.trust::before { content: ""; position: absolute; z-index: -1; inset: var(--overlap) 0 0; pointer-events: none; background:
-  radial-gradient(34% 90% at 12% 35%, rgba(218, 97, 33, .2), rgba(218, 97, 33, 0) 70%),
-  radial-gradient(30% 100% at 50% 80%, rgba(242, 160, 107, .22), rgba(242, 160, 107, 0) 70%),
-  radial-gradient(34% 90% at 88% 40%, rgba(176, 148, 124, .3), rgba(176, 148, 124, 0) 70%); }
 .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
-.stat { --g-fill: rgba(255, 255, 255, .7); position: relative; display: grid; align-content: start; gap: var(--s05); min-width: 0; padding: var(--s2); border-radius: var(--r-lg); } /* glass glass--light in the markup; 70% fill because the top half sits over the dark hero */
+.stat { --g-fill: rgba(255, 255, 255, .97); --g-solid: var(--white); position: relative; display: grid; align-content: start; gap: var(--s05); min-width: 0; padding: var(--s2); border-radius: var(--r-lg); } /* glass glass--light in the markup; near-opaque white so the hero photo never smudges the cards */
 .stat::before { content: ""; position: absolute; inset-block-start: calc(var(--nudge-1) * -1); inset-inline-start: var(--s3); width: 32px; height: 3px; border-radius: 0 0 var(--r-pill) var(--r-pill); background: var(--brand); }
 .stat__badge { width: 40px; height: 40px; border-radius: var(--r-sm); margin-block-end: var(--s1); }
 .stat__badge .icon { width: 24px; height: 24px; }
 .stat__num { display: flex; align-items: baseline; font-family: 'Inter', system-ui, sans-serif; font-size: var(--fs-num); font-weight: 500; line-height: 1.1; letter-spacing: -.02em; color: var(--ink); font-variant-numeric: tabular-nums lining-nums; }
 .stat__plus { margin-inline-start: var(--nudge-2); color: var(--action); font-weight: 400; }
 .stat__label { color: var(--ink); font-size: var(--fs-sm); font-weight: 500; line-height: 1.4; }
-.stat__note { margin-block-start: var(--s1); padding-block-start: var(--s1); border-block-start: 1px solid var(--line); color: var(--muted); font-size: var(--fs-xs); line-height: 1.4; }
 @media (min-width: 768px) {
   .trust { --overlap: var(--s8); }
   .stats { gap: var(--s2); }
@@ -552,11 +573,11 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
 .section-head__lead { margin-block-start: var(--stack-md); color: var(--ink-soft); font-size: var(--fs-lead); }
 .section-head--split { display: flex; flex-direction: column; gap: var(--s3); max-width: none; }
 .section-head--split > div:first-child { max-width: 720px; }
-@media (min-width: 1024px) { .section-head--split { flex-direction: row; align-items: flex-end; justify-content: space-between; } .section-head--split .mockup-tool { max-width: 380px; } }
+@media (min-width: 1024px) { .section-head--split { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
 .section-foot { display: flex; justify-content: center; margin-block-start: var(--head-gap); }
 
 /* ---------- 9. Services (v3 C3): LIGHT section. Ambient warm aurora + architectural grid + grain,
-   desktop rows are tiles (.svc-list--b), mobile uses the index list, cut-corner preview frame with a sweeping brand line.
+   desktop rows are tiles (.svc-list--b), mobile uses the index list, rounded preview frame (inner border, layered shadow).
    Markup: .svc-list > .svc > h3.svc__head > button.svc__btn (+ svg.svc__mark watermark) + .svc__panel > .svc__stage (.svc__bignum, .svc__frame > figure.svc__cover, .svc__float).
    Mobile (and no-JS) always uses the index-list look as an accordion. Ambient animation pauses off-screen (.is-live set by JS). ---------- */
 .svc-section { position: relative; isolation: isolate; background: var(--surface); }
@@ -582,7 +603,7 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
   .svc-fx__spot { display: block; position: absolute; top: 0; left: 0; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 252, 248, .85), rgba(255, 252, 248, 0)); translate: calc(var(--mx, 0px) - 280px) calc(var(--my, 0px) - 280px); opacity: 0; transition: opacity var(--dur-base) var(--ease); }
   .svc-section.is-pointer .svc-fx__spot { opacity: 1; }
 }
-.js .svc-section:not(.is-live) .svc-fx__glow, .js .svc-section:not(.is-live) .svc__frame { animation-play-state: paused; }
+.js .svc-section:not(.is-live) .svc-fx__glow { animation-play-state: paused; }
 @keyframes svc-drift-a { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(70px, -50px, 0) scale(1.12); } }
 @keyframes svc-drift-b { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(-90px, -70px, 0) scale(1.08); } }
 @keyframes svc-breathe { from { transform: translate3d(0, 0, 0) scale(.92); } to { transform: translate3d(-40px, 30px, 0) scale(1.08); } }
@@ -598,11 +619,12 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
 .svc.is-open .svc__btn { background: rgba(218, 97, 33, .07); }
 .svc.is-open .svc__btn::before { transform: scaleY(1); }
 .svc__btn:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
-.svc__icon { display: none; transition: background-color var(--t), color var(--t); }
+.svc__icon { display: none; background: rgba(42, 41, 41, .05); color: var(--ink-soft); transition: background-color var(--t), color var(--t); }
 .svc__icon .icon { width: 22px; height: 22px; color: inherit; }
 .svc__txt { display: grid; min-width: 0; }
 .svc__name { font-size: var(--fs-item); font-weight: 500; line-height: 1.4; color: inherit; }
 .svc__count { color: var(--muted); font-size: var(--fs-xs); line-height: 1.4; }
+.svc__n { color: var(--action); font-size: var(--fs-sm); font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
 .svc__num { order: -1; color: var(--muted); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; letter-spacing: .06em; }
 .svc.is-open .svc__num { color: var(--action); font-weight: 600; }
 .svc__plus { position: relative; display: grid; place-items: center; width: 20px; height: 20px; justify-self: end; color: var(--ink-soft); }
@@ -619,18 +641,13 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
 /* Panel */
 .svc__panel { display: grid; gap: var(--s3); padding: var(--s1) var(--s2) var(--s4); }
 .js .svc:not(.is-open) .svc__panel { display: none; }
-.svc__stage { position: relative; padding-block-start: var(--s4); margin-block-end: var(--s2); filter: drop-shadow(0 2px 4px rgba(42, 41, 41, .05)) drop-shadow(0 14px 28px rgba(42, 41, 41, .10)); }
+.svc__stage { position: relative; padding-block-start: var(--s4); margin-block-end: var(--s2); }
 .svc__bignum { position: absolute; inset-block-start: 0; inset-inline-end: var(--nudge-6); z-index: 0; font-size: var(--display-lg); font-weight: 600; line-height: .8; letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: transparent; -webkit-text-stroke: 1.5px rgba(218, 97, 33, .4); pointer-events: none; user-select: none; }
 @supports not (-webkit-text-stroke: 1px) { .svc__bignum { color: rgba(218, 97, 33, .14); } }
-@property --svc-ang { syntax: "<angle>"; inherits: false; initial-value: 200deg; }
-.svc__frame { --c: 28px; --d: 16px; --k: var(--c); --j: var(--d); position: relative; z-index: 1; padding: var(--nudge-2); background-color: #D9D0C8;
-  background-image: conic-gradient(from var(--svc-ang), rgba(218, 97, 33, 0) 0deg, rgba(218, 97, 33, 0) 200deg, rgba(218, 97, 33, .9) 285deg, #F5BC97 312deg, rgba(218, 97, 33, .9) 338deg, rgba(218, 97, 33, 0) 360deg);
-  animation: svc-sweep 9s linear infinite; }
-@keyframes svc-sweep { to { --svc-ang: 560deg; } }
-.svc__frame, .svc__cover { clip-path: polygon(0 0, calc(100% - var(--k)) 0, 100% var(--k), 100% 100%, var(--j) 100%, 0 calc(100% - var(--j))); }
-[dir="rtl"] .svc__frame, [dir="rtl"] .svc__cover { clip-path: polygon(var(--k) 0, 100% 0, 100% calc(100% - var(--j)), calc(100% - var(--j)) 100%, 0 100%, 0 var(--k)); }
-.svc__cover { --k: calc(var(--c) - 1.2px); --j: calc(var(--d) - 1.2px); margin: 0; aspect-ratio: 16 / 10; border-radius: 0; }
-.svc__cover img { height: 100%; scale: 1.1; translate: 0 calc(var(--svc-par, 0) * 1%); }
+.svc__frame { position: relative; z-index: 1; border-radius: var(--r-lg); box-shadow: 0 1px 2px rgba(42, 41, 41, .06), 0 8px 16px -4px rgba(42, 41, 41, .10), 0 28px 56px -16px rgba(42, 41, 41, .26); }
+.svc__frame::after { content: ""; position: absolute; inset: var(--s1); z-index: 3; border: 1px solid rgba(255, 255, 255, .4); border-radius: calc(var(--r-lg) - var(--s1)); pointer-events: none; } /* fine inner border */
+.svc__cover { margin: 0; aspect-ratio: 16 / 10; }
+.svc__cover img { height: 100%; scale: 1.1; translate: 0 calc(var(--svc-par, 0) * 1%); filter: sepia(.1) saturate(.92) contrast(1.03); } /* warm grade; the .media--overlay scrim sits on top */
 .svc__cap { position: absolute; inset-inline: var(--s3) var(--s2); inset-block-end: var(--s2); z-index: 2; margin: 0; color: var(--white); }
 .svc__cap-name { display: none; font-size: var(--fs-h2); font-weight: 500; line-height: 1.25; }
 .svc__cap .badge { display: none; }
@@ -660,7 +677,6 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
   .js .svc.is-open .svc__panel { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity var(--dur-base) var(--ease), visibility 0s; }
   .js .svc__stage { padding-block-start: var(--s6); }
   .js .svc__bignum { font-size: var(--display-xl); inset-inline-end: var(--s1); }
-  .js .svc__frame { --c: 48px; --d: 24px; }
   .js .svc__cover { aspect-ratio: 16 / 9; }
   .js .svc__cap { inset-inline: var(--s4) var(--s3); inset-block-end: var(--s3); }
   .js .svc__cap-name { display: block; }
@@ -671,30 +687,49 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
   .js .svc-list--b .svc__panel { grid-column: 3; grid-row: 1 / span 5; margin-inline-start: var(--s4); }
   /* Tiles = light glass (tokens, since the same h3 is a plain accordion row on mobile) */
   .js .svc-list--b .svc__head, .js .svc-list--b .svc:first-child .svc__head { grid-column: auto; border: 1px solid; border-color: var(--gl-edge); border-radius: var(--r-md); background-color: var(--gl-solid); background-image: var(--gl-sheen); box-shadow: var(--gl-shadow); }
-  .js .svc-list--b .svc__head:hover { background-color: rgba(255, 255, 255, .84); box-shadow: var(--gl-shadow-hover); }
-  .js .svc-list--b .svc.is-open .svc__head { background-color: rgba(255, 255, 255, .9); border-color: rgba(218, 97, 33, .55); box-shadow: 0 0 0 4px var(--brand-tint), var(--gl-shadow-hover); }
   @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .js .svc-list--b .svc__head { background-color: rgba(255, 255, 255, .55); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
-    .js .svc-list--b .svc__head:hover { background-color: rgba(255, 255, 255, .74); }
-    .js .svc-list--b .svc.is-open .svc__head { background-color: rgba(255, 255, 255, .84); }
   }
+  /* Hover = focus-visible: soft glass + brand-tinted wash, 2px lift with layered shadow, watermark tints and tilts, count turns brand */
+  .js .svc-list--b .svc__head { transition: transform var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+  .js .svc-list--b .svc__head:hover, .js .svc-list--b .svc__head:has(.svc__btn:focus-visible) { transform: translateY(calc(var(--nudge-2) * -1)); background-color: rgba(255, 255, 255, .72); background-image: linear-gradient(135deg, rgba(218, 97, 33, .12), rgba(218, 97, 33, .03) 70%), var(--gl-sheen); border-color: rgba(218, 97, 33, .3); box-shadow: 0 1px 2px rgba(42, 41, 41, .06), 0 8px 16px -6px rgba(42, 41, 41, .12), 0 20px 36px -14px rgba(218, 97, 33, .28); }
+  /* Active tile: the same wash, persistent, plus a soft ring and a short brand bar at the inline-start of the bottom edge */
+  .js .svc-list--b .svc.is-open .svc__head, .js .svc-list--b .svc.is-open .svc__head:hover { transform: none; background-color: rgba(255, 255, 255, .85); background-image: linear-gradient(135deg, rgba(218, 97, 33, .14), rgba(218, 97, 33, .04) 70%), var(--gl-sheen); border-color: rgba(218, 97, 33, .5); box-shadow: 0 0 0 4px var(--brand-tint), 0 8px 16px -6px rgba(42, 41, 41, .12), 0 20px 36px -14px rgba(218, 97, 33, .28); }
   .js .svc-list--b .svc__btn { grid-template-columns: minmax(0, 1fr); align-content: start; gap: var(--s2); min-height: 132px; padding: var(--s2); border-radius: var(--r-md); }
   .js .svc-list--b .svc__btn:hover, .js .svc-list--b .svc.is-open .svc__btn { background: none; }
-  .js .svc-list--b .svc__btn::before, .js .svc-list--b .svc__num { display: none; }
-  .js .svc-list--b .svc__icon { display: inline-grid; width: 40px; height: 40px; border-radius: var(--r-sm); }
-  .js .svc-list--b .svc.is-open .svc__icon { background: var(--brand); color: var(--white); }
-  .js .svc-list--b .svc__mark { inset-block-start: auto; inset-block-end: -30px; inset-inline-end: -26px; width: 112px; height: 112px; margin: 0; }
+  .js .svc-list--b .svc__btn::before { inset-block: auto var(--s2); inset-inline-start: var(--s2); width: var(--s5); height: 3px; transform: scaleX(0); transform-origin: left center; transition: transform var(--dur-base) var(--ease); }
+  [dir="rtl"] .js .svc-list--b .svc__btn::before { transform-origin: right center; }
+  .js .svc-list--b .svc.is-open .svc__btn::before { transform: scaleX(1); }
+  .js .svc-list--b .svc__num, .js .svc-list--b .svc__icon { display: none; }
+  .js .svc-list--b .svc__name { padding-inline-end: var(--s6); }
+  .js .svc-list--b .svc__count { position: absolute; inset-block-start: var(--s2); inset-inline-end: var(--s2); font-size: var(--fs-h3); line-height: 1.2; color: var(--ink); transition: color var(--dur-fast) var(--ease); }
+  .js .svc-list--b .svc__n { font-size: inherit; font-weight: 600; color: inherit; letter-spacing: 0; }
+  .js .svc-list--b .svc__btn:hover .svc__count, .js .svc-list--b .svc__btn:focus-visible .svc__count, .js .svc-list--b .svc.is-open .svc__count { color: var(--action); }
+  .js .svc-list--b .svc__mark { inset-block-start: auto; inset-block-end: calc(var(--s2) * -1); inset-inline-end: calc(var(--s2) * -1); width: 112px; height: 112px; margin: 0; opacity: .09; transition: opacity var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), rotate var(--dur-base) var(--ease), scale var(--dur-base) var(--ease), translate var(--dur-base) var(--ease); }
+  .js .svc-list--b .svc__btn:hover .svc__mark, .js .svc-list--b .svc__btn:focus-visible .svc__mark { opacity: .18; color: var(--brand); rotate: 6deg; scale: 1.08; translate: 0 0; }
+  [dir="rtl"] .js .svc-list--b .svc__btn:hover .svc__mark, [dir="rtl"] .js .svc-list--b .svc__btn:focus-visible .svc__mark { rotate: -6deg; translate: 0 0; }
+  .js .svc-list--b .svc.is-open .svc__mark, .js .svc-list--b .svc.is-open .svc__btn:hover .svc__mark, [dir="rtl"] .js .svc-list--b .svc.is-open .svc__mark { opacity: .2; color: var(--brand); rotate: 0deg; scale: 1.1; translate: 0 0; }
+  /* Preview: same vertical band as the tiles block (rows 1 to 4); the image fills the space above the description */
+  .js .svc-list--b .svc__panel { grid-row: 1 / span 4; align-self: stretch; position: static; display: flex; flex-direction: column; min-height: 0; }
+  .js .svc-list--b .svc:not(.is-open) .svc__panel { display: flex; }
+  .js .svc-list--b .svc__stage { position: relative; flex: 1 1 auto; min-height: 280px; padding: 0; margin: 0; }
+  .js .svc-list--b .svc__bignum { display: none; }
+  .js .svc-list--b .svc__frame { position: absolute; inset: 0; }
+  .js .svc-list--b .svc__cover { height: 100%; aspect-ratio: auto; }
+  .js .svc-list--b .svc__cover img { height: 100%; object-fit: cover; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .svc-fx__glow, .svc__frame { animation: none !important; }
+  .svc-fx__glow { animation: none !important; }
   .svc-fx__glow--a { transition: none; }
-  .svc__mark, .js .svc__panel, .js .svc.is-open .svc__panel, .js .svc__head { transition: none; }
+  .svc__mark, .js .svc__panel, .js .svc.is-open .svc__panel, .js .svc__head, .js .svc__btn::before, .js .svc-list--b .svc__head, .js .svc-list--b .svc__mark, .js .svc-list--b .svc__count { transition: none; }
+  .js .svc-list--b .svc__head:hover, .js .svc-list--b .svc__head:has(.svc__btn:focus-visible) { transform: none; }
+  .js .svc-list--b .svc__btn:hover .svc__mark, .js .svc-list--b .svc__btn:focus-visible .svc__mark { rotate: 0deg; scale: 1; }
 }
 
 /* ---------- 10. Projects (v3 C3): WHITE section after the light services section.
    Soft seam from --surface at the top, faint dot grid + one warm glow. Featured card (cover, glass panel, parallax) + 4:3 image cards.
    Chips filter the set (JS re-renders #pshow). Without JS every card shows. ---------- */
-.projects { position: relative; isolation: isolate; background: var(--white); overflow-x: clip; padding-block-end: var(--head-gap); } /* the quote strip follows */
+.projects { position: relative; isolation: isolate; background: var(--white); overflow-x: clip; }
 .projects__more { display: flex; justify-content: center; margin-block-start: var(--s3); }
 @media (min-width: 768px) { .projects__more { display: none; } }
 .projects > .container { position: relative; z-index: 1; }
@@ -796,12 +831,14 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
   .pfeature__media { aspect-ratio: 16 / 9; }
   .pfeature__media::after { background: linear-gradient(to top, rgba(24, 23, 23, .8) 0%, rgba(24, 23, 23, .3) 50%, rgba(24, 23, 23, 0) 78%); }
   .pfeature__media { border-radius: inherit; }
-  .pfeature__panel { position: absolute; inset-inline-start: var(--s3); inset-block-end: var(--s3); max-width: 480px; padding: var(--s3); border-radius: var(--r-md); } /* glass glass--dark in the markup */
+  /* Floating glass panel: centred on the image height, inset from the inline-start edge, gentle +-6px float (translate), layered shadow. Static centring uses transform so the float can use translate. */
+  .pfeature__panel { position: absolute; inset-inline-start: var(--s4); inset-block-start: 50%; transform: translateY(-50%); max-width: 440px; padding: var(--s3); border-radius: var(--r-md); box-shadow: var(--gd-shadow), 0 2px 4px rgba(0, 0, 0, .12), 0 12px 24px -6px rgba(0, 0, 0, .3), 0 32px 56px -16px rgba(0, 0, 0, .5); animation: pf-float 6s ease-in-out infinite alternate; } /* glass glass--dark in the markup */
+  @keyframes pf-float { from { translate: 0 calc(var(--nudge-6) * -1); } to { translate: 0 var(--nudge-6); } }
   .pfeature__panel::before { inset-block-start: calc(var(--nudge-1) * -1); border-radius: 0 0 var(--r-pill) var(--r-pill); }
 }
 @media (min-width: 1024px) {
   .pfeature__media { aspect-ratio: auto; height: 520px; }
-  .pfeature__panel { inset-inline-start: var(--s4); inset-block-end: var(--s4); max-width: 520px; padding: var(--s4); }
+  .pfeature__panel { inset-inline-start: var(--s6); max-width: 480px; padding: var(--s4); }
   .pfeature__panel::before { inset-inline-start: var(--s4); }
 }
 
@@ -811,7 +848,9 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
 @media (min-width: 560px) { .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); } }
 @media (min-width: 1024px) { .pgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 /* Two columns on large phones / small tablets: a lone last card spans the row instead of leaving a hole */
-@media (min-width: 560px) and (max-width: 767px) { .pgrid > li:last-child:nth-child(odd) { grid-column: 1 / -1; } .pgrid > li:last-child:nth-child(odd) .pcard { aspect-ratio: 16 / 9; } }
+@media (min-width: 560px) and (max-width: 1023px) { .pgrid > li:last-child:nth-child(odd) { grid-column: 1 / -1; } .pgrid > li:last-child:nth-child(odd) .pcard { aspect-ratio: 16 / 9; } }
+/* Featured + 5 cards: on desktop the 5th card spans two columns so the last row is full */
+@media (min-width: 1024px) { .pfeat + .pgrid > li:last-child:nth-child(3n + 2) { grid-column: span 2; } .pfeat + .pgrid > li:last-child:nth-child(3n + 2) .pcard { aspect-ratio: 11 / 4; } }
 .pcard { position: relative; isolation: isolate; overflow: hidden; aspect-ratio: 4 / 3; border-radius: var(--r-md); background: var(--ink); color: var(--white); box-shadow: var(--shadow-1); transition: transform var(--t), box-shadow var(--t); }
 .pcard:hover { transform: translateY(-6px); box-shadow: var(--shadow-3); }
 .pcard__media { position: absolute; inset: 0; border-radius: inherit; }
@@ -852,7 +891,7 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
 /* ---------- 13. About (v3 D): soft --surface section (fades in from the white Projects, out to the white Team).
    Founder photo in a --r-lg frame: offset brand outline + dot grid behind, glass "since" chip and glass caption on top.
    To swap the photo, replace templates/default/images/about/founder_img.png (any portrait ratio: object-fit cover). ---------- */
-.about { position: relative; isolation: isolate; background: var(--surface); overflow-x: clip; }
+.about { position: relative; isolation: isolate; background: var(--white); overflow-x: clip; }
 .about > .container { position: relative; z-index: 1; }
 .about::before, .about::after, .capabilities::before, .capabilities::after { content: ""; position: absolute; inset-inline: 0; height: 140px; z-index: 0; pointer-events: none; }
 .about::before, .capabilities::before { inset-block-start: 0; background: linear-gradient(to bottom, var(--white), rgba(255, 255, 255, 0)); }
@@ -924,7 +963,7 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
 /* Vertical carousel (desktop, 5+ members, motion allowed). JS builds .team-v: 3 columns of the same cards moving slowly in
    opposite directions (up / down / up) inside a fixed-height rounded window with soft top and bottom fades.
    The duplicate lists that make the loop seamless are aria-hidden + inert (not focusable). Pause: hover, focus, touch, button. */
-.team[data-vertical] .team__controls { justify-content: flex-end; max-width: 1000px; margin-inline: auto; margin-block-end: var(--s2); }
+.team[data-vertical] .team__controls { display: none; } /* the global motion switch controls this loop */
 .team[data-vertical] .team__counter, .team[data-vertical] [data-team-prev], .team[data-vertical] [data-team-next] { display: none; }
 .team-v { max-width: 1000px; margin-inline: auto; padding-inline: var(--s3); border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--white); box-shadow: var(--shadow-1); overflow: hidden; }
 .team-v__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: 100%; gap: var(--s3); height: 640px; overflow: hidden;
@@ -935,6 +974,15 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
 .team-v .tcard { flex: none; width: 100%; }
 .team-v .tcard__photo { aspect-ratio: 1 / 1; }
 .team-v .tcard:focus-visible { outline-offset: -3px; }
+/* Hover/focus: every other card blurs and dims, the hovered one stays sharp and lifts slightly */
+.team-v .tcard { transition: filter var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease), translate var(--dur-fast) var(--ease); }
+.team-v:has(.tcard:hover, .tcard:focus-visible) .tcard:not(:hover, :focus-visible) { filter: blur(3px); opacity: .55; }
+.team-v .tcard:hover, .team-v .tcard:focus-visible { translate: 0 calc(var(--nudge-2) * -1); }
+@media (prefers-reduced-motion: reduce) {
+  .team-v:has(.tcard:hover, .tcard:focus-visible) .tcard:not(:hover, :focus-visible) { filter: none; }
+  .team-v .tcard { transition: opacity var(--dur-fast) var(--ease); }
+  .team-v .tcard:hover, .team-v .tcard:focus-visible { translate: none; }
+}
 
 /* ---------- 15. Capabilities and qualification (v3 D2): soft --surface section, document showcase, full-width sector strip ----------
    .seg = segmented tabs (role=tablist; JS: arrows / Home / End, aria-selected, roving tabindex). Hidden without JS: both panels then stack.
@@ -1048,14 +1096,21 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
 /* Sector tiles: 2 columns on phones (a lone last tile spans the row), 12-column grid from 640px so no row ever has an orphan gap */
 .sectors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
 @media (max-width: 639px) { .sectors > li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
-.sector-tile { position: relative; display: flex; flex-direction: column; gap: var(--s2); height: 100%; min-height: 48px; padding: var(--s2); border-radius: var(--r-md); color: var(--ink); text-decoration: none; transition: transform var(--t), box-shadow var(--t), background-color var(--t); }
-.sector-tile:hover, .sector-tile:focus-visible { color: var(--ink); transform: translateY(-3px); box-shadow: var(--gl-shadow-hover); background-color: rgba(255, 255, 255, .85); }
-.sector-tile .icon-badge { background: var(--brand-tint-strong); }
-.sector-tile__count { order: 1; display: flex; align-items: baseline; gap: var(--s1); flex-wrap: wrap; }
-.sector-tile__name { order: 2; font-weight: 500; line-height: 1.45; }
-.sector-tile__num { display: inline-block; min-width: 1.4ch; font-size: var(--fs-h2); font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; }
+.sectors > li { display: flex; }
+.sector-tile { position: relative; isolation: isolate; overflow: hidden; display: flex; flex: 1; flex-direction: column; gap: var(--s2); min-height: 48px; padding: var(--s3); border: 1px solid transparent; border-radius: var(--r-lg); color: var(--ink); text-decoration: none; background: linear-gradient(var(--gl-solid), var(--gl-solid)) padding-box, linear-gradient(135deg, color-mix(in srgb, var(--brand) 45%, transparent), var(--line) 42%, var(--white) 100%) border-box; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: var(--shadow-1); transition: transform var(--t), box-shadow var(--t); }
+.sector-tile .icon-badge { transition: background-color var(--t), color var(--t); }
+.sector-tile::before { content: ""; position: absolute; z-index: 1; inset-inline: 0; inset-block-start: 0; height: 3px; background: var(--btn-grad); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-base) var(--ease); }
+[dir="rtl"] .sector-tile::before { transform-origin: right; }
+.sector-tile:hover, .sector-tile:focus-visible { color: var(--ink); transform: translateY(calc(var(--nudge-4) * -1)); box-shadow: var(--shadow-2), 0 18px 36px -14px rgba(110, 58, 26, .28); }
+.sector-tile:hover::before, .sector-tile:focus-visible::before { transform: scaleX(1); }
+.sector-tile:hover .icon-badge, .sector-tile:focus-visible .icon-badge { background: var(--brand); color: var(--white); box-shadow: none; }
+.sector-tile .icon-badge { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--brand-tint-strong); color: var(--action); box-shadow: inset 0 0 0 1px var(--brand-tint-strong); }
+.sector-tile .icon-badge .icon { width: 28px; height: 28px; }
+.sector-tile__name { order: 2; font-size: var(--fs-item); font-weight: 500; line-height: 1.45; min-height: calc(2 * 1.45em); }
+.sector-tile__count { order: 3; display: flex; align-items: baseline; gap: var(--s1); flex-wrap: wrap; margin-block-start: auto; padding-block-start: var(--s2); border-block-start: 1px solid var(--line); }
+.sector-tile__num { display: inline-block; min-width: 1.4ch; font-size: var(--fs-h2); font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; color: var(--action); }
 .sector-tile__unit { color: var(--ink-soft); font-size: var(--fs-sm); }
-.sector-tile__go { position: absolute; inset-block-start: var(--s2); inset-inline-end: var(--s2); width: 20px; height: 20px; color: var(--action); opacity: .7; transition: translate var(--t), opacity var(--t); }
+.sector-tile__go { position: absolute; inset-block-start: var(--s3); inset-inline-end: var(--s3); width: 20px; height: 20px; color: var(--action); opacity: .7; transition: translate var(--t), opacity var(--t); }
 .sector-tile:hover .sector-tile__go { translate: var(--nudge-3) calc(var(--nudge-3) * -1); opacity: 1; }
 [dir="rtl"] .sector-tile:hover .sector-tile__go { translate: calc(var(--nudge-3) * -1) calc(var(--nudge-3) * -1); }
 @media (min-width: 640px) {
@@ -1063,9 +1118,8 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
   .sectors--6 > li { grid-column: span 4; }
   .sectors--7 > li { grid-column: span 3; }
   .sectors--7 > li:nth-child(n + 5) { grid-column: span 4; }
-  .sector-tile { padding: var(--s3); }
 }
-@media (prefers-reduced-motion: reduce) { .sector-tile:hover, .sector-tile:focus-visible { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .sector-tile:hover, .sector-tile:focus-visible { transform: none; } .sector-tile, .sector-tile::before { transition: none; } }
 
 /* ---------- 16. How we work (v3.1): progress rail + image-led step cards ----------
    Rail (.flowrail, decorative): 4 numbered glass nodes joined by a thin line, aligned with the card columns. The active node is
@@ -1230,14 +1284,14 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
   .footer__about, .footer__contact { grid-column: auto; }
 }
 
-/* ---------- 19. Floating buttons ---------- */
-.fab { position: fixed; inset-block-end: var(--s2); inset-inline-end: var(--s2); z-index: 40; display: flex; flex-direction: column; gap: var(--s2); }
-.fab__btn { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: var(--action); color: var(--white); box-shadow: var(--shadow-lg); transition: background-color var(--t); }
-.fab__btn:hover { background: var(--action-hover); color: var(--white); }
-.fab__btn .icon { width: 28px; height: 28px; }
-.menu-open .fab, .menu-open .motion-toggle { display: none; }
-@media (min-width: 1024px) { .fab { inset-block-end: var(--s3); inset-inline-end: var(--s3); } }
-.site-footer { padding-block-end: var(--s8); } /* room so the floating buttons never cover the copyright */
+/* ---------- 19. Phone contact bar + footer room ---------- */
+.mbar { position: fixed; inset-inline: 0; inset-block-end: 0; z-index: 40; display: flex; gap: var(--s1); padding: var(--s1) var(--s2); padding-block-end: calc(var(--s1) + env(safe-area-inset-bottom, 0px)); padding-inline: max(var(--s2), env(safe-area-inset-left, 0px)) max(var(--s2), env(safe-area-inset-right, 0px)); border-radius: 0; --g-fill: var(--gd-fill-strong); }
+.mbar__btn { flex: 1 1 0; min-width: 0; gap: var(--s1); padding-inline: var(--s2); }
+.mbar__btn .icon { width: 22px; height: 22px; }
+.menu-open .mbar, .menu-open .motion-toggle { display: none; }
+@media (min-width: 768px) { .mbar { display: none; } }
+.site-footer { padding-block-end: var(--s8); }
+@media (max-width: 767px) { .site-footer { padding-block-end: calc(var(--mbar-h) + env(safe-area-inset-bottom, 0px)); } } /* room so the bar never covers the copyright */
 @media (min-width: 1024px) { .site-footer { padding-block-end: 0; } }
 
 /* ---------- 20. Reduced motion ---------- */
@@ -1267,7 +1321,7 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
 
 
 /* ---------- 22. Marquee + vertical slider (v3 refinements) ----------
-   JS adds .is-marquee / .is-scroll (sector tiles) and .is-vslide (CTA images) only when it can; duplicates are aria-hidden + inert.
+   JS adds .is-marquee / .is-scroll (sector tiles) and .is-vslide (CTA images) only when it can; duplicates are aria-hidden (sector clones stay hoverable: tabindex=-1, not inert).
    Edge fades are masks, so they blend into the exact background behind them. Pause: hover, focus, touch (.is-held). */
 .sector-marquee { --mq-to: -50%; overflow: hidden; padding: var(--s3) 0 var(--s6); margin-block: calc(var(--s3) * -1) calc(var(--s1) - var(--s6)); -webkit-mask-image: linear-gradient(to right, transparent 0, rgba(0,0,0,.25) 24px, rgba(0,0,0,.7) 48px, #000 80px, #000 calc(100% - 80px), rgba(0,0,0,.7) calc(100% - 48px), rgba(0,0,0,.25) calc(100% - 24px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, rgba(0,0,0,.25) 24px, rgba(0,0,0,.7) 48px, #000 80px, #000 calc(100% - 80px), rgba(0,0,0,.7) calc(100% - 48px), rgba(0,0,0,.25) calc(100% - 24px), transparent 100%); }
 [dir="rtl"] .sector-marquee { --mq-to: 50%; }
@@ -1301,7 +1355,7 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
   @keyframes cta-float { 0%, 100% { translate: 0 calc(var(--nudge-4) * -1); } 50% { translate: 0 var(--nudge-4); } }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sectors.is-marquee, .is-vslide .cta__vbelt, .cta__chip { animation: none !important; }
+  .sectors.is-marquee, .is-vslide .cta__vbelt, .cta__chip, .pfeature__panel { animation: none !important; }
 }
 
 /* ---------- 23. v3 audit fixes ---------- */
@@ -1309,13 +1363,66 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
 /* Arabic: letters connect, so no letter-spacing (the ASCO word is Latin art and keeps its own) */
 [dir="rtl"] *:not(.footer__word, .footer__word *) { letter-spacing: 0; }
 
-/* Quote strip (after Projects): one line + Ember button, light, not heavy. Same quote target as header, hero and CTA. */
-.qstrip { background: var(--white); padding-block: 0 var(--section-y); }
-.qstrip__box { display: flex; flex-direction: column; gap: var(--s2); padding: var(--s3); border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); }
-.qstrip__text { font-size: var(--fs-lead); font-weight: 500; line-height: 1.5; color: var(--ink); }
-@media (min-width: 640px) { .qstrip__box { flex-direction: row; align-items: center; justify-content: space-between; gap: var(--s3); padding-inline: var(--s4); } .qstrip__box .btn { flex: none; } }
+/* ---------- 24b. v3.3 additions: clients strip, licences row, services quote, CTA info rows ---------- */
+/* Clients: the stats band continues (surface), single calm row. Placeholder wordmark tiles; real logos go in .client img (grey until hover). */
+.clients { background: var(--surface); padding-block: var(--s6) var(--s8); } /* slim row: smaller than --section-y on purpose (documented exception) */
+.clients__title { margin-block-end: var(--s3); text-align: center; color: var(--muted); font-size: var(--fs-sm); font-weight: 500; line-height: 1.4; }
+.clients__view { position: relative; overflow: hidden; padding-block: var(--s4); margin-block: calc(var(--s4) * -1); } /* the padding is the room the hover lift and shadow need inside the clip box */
+.clients__row { display: flex; flex-wrap: nowrap; justify-content: center; align-items: stretch; }
+.client { --lg1: var(--muted); --lg2: color-mix(in srgb, var(--muted) 55%, var(--white)); position: relative; display: flex; flex: none; width: calc(var(--s8) * 3); padding-inline: var(--s05); }
+.client::after { content: ""; position: absolute; inset-block: var(--s2); inset-inline-end: 0; width: 1px; background: var(--line); }
+.client:last-child::after { display: none; }
+.client--1 { --c1: #2F4B6E; --c2: var(--brand); }
+.client--2 { --c1: #2E6B63; --c2: #C08A2E; }
+.client--3 { --c1: var(--action); --c2: var(--ink); }
+.client--4 { --c1: #4B5A8C; --c2: var(--brand); }
+.client--5 { --c1: #9A3B3B; --c2: var(--ink); }
+.client--6 { --c1: #3E7A4F; --c2: var(--brand); }
+.client__tile { display: flex; flex: 1; align-items: center; gap: var(--s1); min-height: var(--s8); padding: var(--s1); border-radius: var(--r-md); background: transparent; color: var(--muted); text-align: start; box-shadow: 0 0 0 rgba(0, 0, 0, 0); transition: color var(--t), background-color var(--t), box-shadow var(--t), transform var(--t); }
+.client__logo { flex: none; width: 40px; height: 40px; }
+.lg-s, .lg-a { fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke var(--t), fill var(--t); }
+.lg-s { stroke: var(--lg1); }
+.lg-a { stroke: var(--lg2); }
+.lg-f { fill: var(--lg2); stroke: none; transition: fill var(--t); }
+.client__name { min-width: 0; font-size: var(--fs-sm); font-weight: 600; line-height: 1.35; color: inherit; }
+.client:hover, .client:focus-within { --lg1: var(--c1); --lg2: var(--c2); }
+.client:hover .client__tile { background: var(--white); color: var(--ink); box-shadow: var(--shadow-2); transform: translateY(calc(var(--nudge-4) * -1)); }
+@media (prefers-reduced-motion: reduce) { .client:hover .client__tile { transform: none; } }
+/* Overflow: JS adds .is-marquee (clones, gentle drift) or .is-scroll (reduced motion: swipe row). Edge fades are masks. */
+.clients__view.is-marquee, .clients__view.is-scroll { -webkit-mask-image: linear-gradient(to right, transparent 0, rgba(0,0,0,.35) 24px, #000 64px, #000 calc(100% - 64px), rgba(0,0,0,.35) calc(100% - 24px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, rgba(0,0,0,.35) 24px, #000 64px, #000 calc(100% - 64px), rgba(0,0,0,.35) calc(100% - 24px), transparent 100%); }
+.clients__view.is-scroll { overflow-x: auto; scrollbar-width: none; }
+.clients__view.is-scroll::-webkit-scrollbar { display: none; }
+.clients__row.is-marquee { --mq-to: -50%; justify-content: flex-start; width: max-content; animation: mq-x var(--mq-dur, 40s) linear infinite; will-change: transform; }
+[dir="rtl"] .clients__row.is-marquee { --mq-to: 50%; }
+.clients__row.is-marquee .client:last-child::after { display: block; }
+.clients__row.is-scroll { justify-content: flex-start; width: max-content; }
+.clients__view:hover .clients__row.is-marquee, .clients__view:focus-within .clients__row.is-marquee { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .clients__row.is-marquee { animation: none !important; } }
 
-/* Global motion toggle: discreet dark-glass pill at the inline-start bottom corner (WhatsApp is at the end corner) */
+/* About: licences and classifications badges under the founder text */
+.about__lic { margin-block-end: var(--s4); }
+.about__lic-title { margin-block-end: var(--s1); color: var(--ink-soft); font-size: var(--fs-sm); font-weight: 500; line-height: 1.4; }
+.about__lic-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s1); }
+@media (min-width: 480px) { .about__lic-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .about__lic-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.cred { display: flex; align-items: center; gap: var(--s1); min-width: 0; padding: var(--s1) var(--s2); border: 1px solid transparent; border-radius: var(--r-md); background: linear-gradient(var(--gl-solid), var(--gl-solid)) padding-box, linear-gradient(135deg, rgba(218, 97, 33, .35), rgba(42, 41, 41, .08) 60%, rgba(218, 97, 33, .15)) border-box; box-shadow: var(--shadow-1); transition: box-shadow var(--t), transform var(--t); }
+.cred:hover { box-shadow: var(--shadow-2); transform: translateY(calc(var(--nudge-2) * -1)); }
+.cred__icon { background: var(--brand-tint-strong); }
+.cred__body { display: grid; gap: var(--nudge-1); min-width: 0; }
+.cred__title { color: var(--ink); font-size: var(--fs-sm); font-weight: 600; line-height: 1.4; }
+.cred__sub { color: var(--muted); font-size: var(--fs-xs); line-height: 1.4; }
+@media (prefers-reduced-motion: reduce) { .cred:hover { transform: none; } }
+
+/* Services: the single quote button, once, under the list */
+.svc-foot { margin-block-start: var(--s6); }
+
+/* CTA: working hours and address rows */
+.cta__info { display: grid; gap: var(--s1); margin-block-start: var(--s2); color: var(--ink-soft); font-size: var(--fs-sm); }
+.cta__info li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s2); min-height: var(--s4); }
+.cta__info .icon { flex: none; width: 20px; height: 20px; color: var(--action); }
+.cta__info .link-arrow { min-height: var(--hit-sm); font-size: var(--fs-sm); color: var(--action-hover); }
+
+/* Global motion toggle: discreet dark-glass pill at the inline-start bottom corner (on phones it sits above the contact bar) */
 .motion-toggle { position: fixed; inset-block-end: var(--s2); inset-inline-start: var(--s2); z-index: 40; display: inline-flex; align-items: center; justify-content: center; gap: var(--s1); min-width: var(--btn-h); height: var(--btn-h); padding: 0; border-radius: var(--r-pill); --g-fill: var(--gd-fill-strong); font-size: var(--fs-sm); font-weight: 500; line-height: 1.2; cursor: pointer; transition: background-color var(--t), box-shadow var(--t); }
 .motion-toggle:hover { background-color: var(--ink); }
 .motion-toggle .icon { width: 20px; height: 20px; }
@@ -1323,6 +1430,7 @@ html:not(.js) .hero__buttons, html:not(.js) .hero__thumbs, html:not(.js) .hero__
 .motion-toggle[aria-pressed="true"] .is-play { display: block; }
 .motion-toggle:focus-visible { outline-color: var(--ink); box-shadow: 0 0 0 var(--nudge-3) var(--white); }
 .motion-toggle__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } /* icon only on phones, still named */
+@media (max-width: 767px) { .motion-toggle { inset-block-end: calc(var(--mbar-h) + var(--s1) + env(safe-area-inset-bottom, 0px)); } }
 @media (min-width: 768px) { .motion-toggle { padding-inline: var(--s2) var(--s3); } .motion-toggle__label { position: static; width: auto; height: auto; overflow: visible; clip: auto; } }
 @media (min-width: 1024px) { .motion-toggle { inset-block-end: var(--s3); inset-inline-start: var(--s3); } }
 
@@ -1343,14 +1451,30 @@ html.motion-paused *, html.motion-paused *::before, html.motion-paused *::after 
    soft diagonal sheen, fine grain, inner bottom shadow, and a gentle dark gradient behind the text (white text stays >= 4.5:1
    even over a white photo, see the contrast numbers in the iteration report). Without backdrop-filter: the solid dark panel. */
 @media (min-width: 768px) {
-  .pfeature__panel { --on-ink-muted: #E6E2DE; --pf-sheen: linear-gradient(112deg, rgba(255, 255, 255, .14) 0%, rgba(255, 255, 255, .04) 24%, rgba(255, 255, 255, 0) 44%); --pf-protect: linear-gradient(to bottom, rgba(20, 18, 18, .5) 0%, rgba(20, 18, 18, .58) 100%);
+  .pfeature__panel { --on-ink-muted: #E6E2DE; --pf-sheen: linear-gradient(112deg, rgba(255, 255, 255, .14) 0%, rgba(255, 255, 255, .04) 24%, rgba(255, 255, 255, 0) 44%); --pf-protect: linear-gradient(to bottom, rgba(20, 18, 18, .62) 0%, rgba(20, 18, 18, .66) 100%);
     --pf-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
     border-color: transparent; border-radius: var(--r-lg); background-color: var(--gd-solid); background-image: var(--pf-sheen), var(--pf-grain), var(--pf-protect);
-    box-shadow: inset 0 -16px 24px -18px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .22), 0 2px 6px rgba(0, 0, 0, .14), 0 24px 48px -18px rgba(0, 0, 0, .5); }
+    box-shadow: inset 0 -16px 24px -18px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .22), 0 2px 6px rgba(0, 0, 0, .14), 0 12px 24px -6px rgba(0, 0, 0, .3), 0 32px 56px -16px rgba(0, 0, 0, .5); } /* floating: layered shadow; the panel floats (pf-float, section 6) */
   [dir="rtl"] .pfeature__panel { --pf-sheen: linear-gradient(248deg, rgba(255, 255, 255, .14) 0%, rgba(255, 255, 255, .04) 24%, rgba(255, 255, 255, 0) 44%); }
   .pfeature__panel::after { content: ""; position: absolute; inset: calc(var(--nudge-1) * -1); padding: 1px; border-radius: inherit; pointer-events: none; background: linear-gradient(135deg, rgba(255, 255, 255, .75) 0%, rgba(255, 255, 255, .18) 40%, rgba(255, 255, 255, .06) 70%, rgba(255, 255, 255, .24) 100%);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
   @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .pfeature__panel { background-color: rgba(30, 29, 29, .26); -webkit-backdrop-filter: blur(22px) saturate(170%); backdrop-filter: blur(22px) saturate(170%); }
   }
+}
+
+
+/* ---------- 25. Mobile fixes (v3.4): services accordion rows, footer ASCO strip and floating buttons ---------- */
+@media (max-width: 1023px) {
+  .svc__mark, .svc__bignum { display: none; } /* watermark and outline number only belong to the desktop preview */
+  .svc__btn { grid-template-columns: var(--s4) minmax(0, 1fr) auto var(--s3); gap: var(--s1); min-height: var(--s8); padding: var(--s1) var(--s2); }
+  .svc__txt { display: contents; }
+  .svc__name { grid-column: 2; }
+  .svc__count { grid-column: 3; justify-self: end; font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+  .svc__num { grid-column: 1; }
+  .svc__plus { grid-column: 4; }
+}
+@media (max-width: 767px) {
+  .footer__word { inset-block-end: calc(var(--mbar-h) + var(--s2) + env(safe-area-inset-bottom, 0px)); font-size: clamp(4rem, 24vw, 7rem); opacity: .06; }
+  .site-footer { padding-block-end: calc(var(--mbar-h) + var(--btn-h) + var(--s4) + env(safe-area-inset-bottom, 0px)); } /* room for the ASCO strip, the motion toggle and the bar */
 }

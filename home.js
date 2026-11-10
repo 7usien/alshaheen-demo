@@ -83,7 +83,7 @@
         .filter(function (el) { return el.offsetParent !== null; });
     };
     var behind = function () {
-      return Array.prototype.slice.call(document.querySelectorAll('.topbar, .site-header .logo, .mainbar__actions > :not(.menu-toggle), main, .site-footer, .fab, [data-motion-toggle]'));
+      return Array.prototype.slice.call(document.querySelectorAll('.topbar, .site-header .logo, .mainbar__actions > :not(.menu-toggle), main, .site-footer, .mbar, [data-motion-toggle]'));
     };
     var openMenu = function () {
       panel.classList.add('is-open');
@@ -519,13 +519,14 @@
   /* PROJECTS-TEMPLATES-END */
 
   var currentCat = 'all';
+  var ALL_MAX = 6; // "all" = 1 featured + 5 cards (owner decision); a sector filter shows all of its projects
   var PHONE_MAX = 4; // phones: "all" shows at most 4 projects; the rest is one tap away ("View all projects"). A sector filter shows all of its projects.
   function poolFor(cat) {
     return cat === 'all' ? PROJECTS.all.slice() : PROJECTS.all.filter(function (p) { return p.catId === cat; });
   }
   function listFor(cat) {
     var l = poolFor(cat);
-    return (cat === 'all' && phone.matches) ? l.slice(0, PHONE_MAX) : l;
+    return cat === 'all' ? l.slice(0, phone.matches ? PHONE_MAX : ALL_MAX) : l;
   }
   function setPressed(btn) {
     Array.prototype.forEach.call(filters.querySelectorAll('[data-filter]'), function (b) {
@@ -785,7 +786,7 @@
       var wrap = document.createElement('div');
       wrap.className = 'team-v__cols';
       win.appendChild(wrap);
-      var speeds = [20, 26, 17], dirs = [1, -1, 1];
+      var speeds = [28, 37, 24], dirs = [1, -1, 1];
       var cols = [0, 1, 2].map(function (ci) {
         var col = document.createElement('div'); col.className = 'team-v__col';
         var belt = document.createElement('div'); belt.className = 'team-v__belt';
@@ -944,15 +945,6 @@
     var vertTimer = 0;
     window.addEventListener('resize', function () { window.clearTimeout(vertTimer); vertTimer = window.setTimeout(function () { if (vert.on) vert.sync(true); }, 200); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (vert.on) vert.sync(true); });
-
-    // MOCKUP ONLY: preview the layout with 4 / 8 / 12 members
-    var teamBtns = document.querySelectorAll('[data-team]');
-    Array.prototype.forEach.call(teamBtns, function (btn) {
-      btn.addEventListener('click', function () {
-        Array.prototype.forEach.call(teamBtns, function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
-        setupTeam(parseInt(btn.getAttribute('data-team'), 10), true);
-      });
-    });
   }
 
   /* ---------- 7c2. How we work: progress rail above the step cards ----------
@@ -994,7 +986,7 @@
   })();
 
   /* ---------- 7d. Sector marquee + CTA vertical slider (v3 refinements) ----------
-     Both loops are CSS animations (see CSS section 22). Duplicates are aria-hidden + inert, so keyboard and screen readers meet each
+     Both loops are CSS animations (see CSS section 22). Duplicates are aria-hidden with tabindex=-1 (sector tiles, still hoverable) or inert (CTA images), so keyboard and screen readers meet each
      item once. Pause: hover, focus (CSS) and touch (.is-held, released after 3s). Reduced motion: no duplicates, no animation;
      the sector tiles become a plain horizontally scrollable row and the CTA images stay a static column. */
   (function () {
@@ -1006,34 +998,41 @@
         t = window.setTimeout(function () { box.classList.remove('is-held'); }, 3000);
       });
     }
-    function dup(node) {
+    function dup(node, hoverable) {
       var c = node.cloneNode(true);
-      c.setAttribute('aria-hidden', 'true'); c.setAttribute('inert', '');
+      // Hidden from assistive tech either way. Sector clones must stay hoverable, so they are NOT inert: their links are only taken out of the tab order.
+      c.setAttribute('aria-hidden', 'true');
+      if (hoverable) {
+        Array.prototype.forEach.call(c.querySelectorAll('a, button, input, select, textarea, [tabindex]'), function (el) { el.setAttribute('tabindex', '-1'); });
+      } else c.setAttribute('inert', '');
       Array.prototype.forEach.call(c.querySelectorAll('[data-countup]'), function (n) { n.removeAttribute('data-countup'); });
       return c;
     }
-    var ul = document.querySelector('.sectors');
-    if (ul && !ul.parentNode.classList.contains('sector-marquee')) {
-      var box = document.createElement('div');
-      box.className = 'sector-marquee';
-      ul.removeAttribute('data-reveal-group');
-      box.setAttribute('data-reveal', '');
-      ul.parentNode.insertBefore(box, ul);
-      box.appendChild(ul);
-      if (reduceMotion.matches) {
-        box.classList.add('is-scroll'); ul.classList.add('is-scroll');
-      } else {
-        ul.classList.add('is-marquee');
-        var items = Array.prototype.slice.call(ul.children);
-        var setW = 0;
-        items.forEach(function (li) { setW += li.offsetWidth + parseFloat(getComputedStyle(li).marginInlineEnd || 0); });
-        var k = Math.max(1, Math.ceil((box.clientWidth || window.innerWidth) / Math.max(1, setW)));
-        var total = items.length * (2 * k - 1);
-        for (var i = 0; i < total; i++) ul.appendChild(dup(items[i % items.length]));
-        ul.style.setProperty('--mq-dur', Math.round((setW * k) / 32) + 's'); // ~32px per second
-        hold(box);
+    /* Sector strip (icon tiles): gentle marquee; reduced motion gets a swipe row (no clones). */
+    function sectorSetup(ul) {
+      var box = ul.parentNode.classList.contains('sector-marquee') ? ul.parentNode : null;
+      if (!box) {
+        box = document.createElement('div');
+        box.className = 'sector-marquee';
+        ul.removeAttribute('data-reveal-group'); box.setAttribute('data-reveal', '');
+        ul.parentNode.insertBefore(box, ul);
+        box.appendChild(ul);
       }
+      Array.prototype.forEach.call(ul.querySelectorAll('[data-clone]'), function (c) { c.parentNode.removeChild(c); });
+      ul.classList.remove('is-marquee', 'is-scroll'); box.classList.remove('is-scroll');
+      if (reduceMotion.matches) { box.classList.add('is-scroll'); ul.classList.add('is-scroll'); return; }
+      ul.classList.add('is-marquee');
+      var items = Array.prototype.slice.call(ul.children);
+      var setW = 0;
+      items.forEach(function (li) { setW += li.offsetWidth + parseFloat(getComputedStyle(li).marginInlineEnd || 0); });
+      var k = Math.max(1, Math.ceil((box.clientWidth || window.innerWidth) / Math.max(1, setW)));
+      var total = items.length * (2 * k - 1);
+      for (var i = 0; i < total; i++) { var c = dup(items[i % items.length], true); c.setAttribute('data-clone', ''); ul.appendChild(c); }
+      ul.style.setProperty('--mq-dur', Math.round((setW * k) / 32) + 's');
+      hold(box);
     }
+    var ul = document.querySelector('.sectors');
+    if (ul && !ul.parentNode.classList.contains('sector-marquee')) sectorSetup(ul);
     var vis = document.querySelector('.cta__visual');
     if (vis && !reduceMotion.matches) {
       vis.classList.add('is-vslide');
@@ -1050,11 +1049,6 @@
     sync();
     phone.addEventListener('change', sync);
   })();
-
-  /* ---------- 7c. Mockup only: the PDF buttons point nowhere yet (aria-disabled buttons, "available soon") ---------- */
-  Array.prototype.forEach.call(document.querySelectorAll('[data-pdf-placeholder]'), function (a) {
-    a.addEventListener('click', function (e) { e.preventDefault(); });
-  });
 
   /* ---------- 8. Motion foundation (design system v3): GSAP 3.15.0 + ScrollTrigger, loaded with defer ----------
      Public API for later sections: window.DSMotion
@@ -1167,6 +1161,77 @@
       }
     }
   }
+
+  /* ---------- 8b. Desktop nav indicator . One .nav__ind element slides (transform + width via CSS
+     custom properties) to the hovered/focused link and rests on the current page. Measures physical rects, so RTL and LTR both land
+     right. Snaps instantly with reduced motion or the motion switch (CSS removes the transition). ---------- */
+  var navEl = document.querySelector('.nav');
+  var navList = navEl ? navEl.querySelector('.nav__list') : null;
+  if (navEl && navList) {
+    var ind = document.createElement('span');
+    ind.className = 'nav__ind';
+    ind.setAttribute('aria-hidden', 'true');
+    navEl.appendChild(ind);
+    var navLinks = navList.querySelectorAll('a');
+    var navRest = navList.querySelector('a[aria-current="page"]') || navLinks[0];
+    var navDesktop = window.matchMedia('(min-width: 1024px)');
+    var placeInd = function (link, instant) {
+      if (!link || !navDesktop.matches || link.offsetWidth === 0) { ind.classList.remove('is-ready'); return; }
+      var n = navEl.getBoundingClientRect(), r = link.getBoundingClientRect();
+      var x = r.left - n.left, w = r.width;
+      var cs = window.getComputedStyle(link);
+      x += parseFloat(cs.paddingLeft) || 0;
+      w -= (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
+      if (instant) ind.classList.remove('is-anim');
+      ind.style.setProperty('--ix', x + 'px');
+      ind.style.setProperty('--iy', (r.top - n.top) + 'px');
+      ind.style.setProperty('--iw', w + 'px');
+      ind.style.setProperty('--lh', r.height + 'px');
+      ind.classList.add('is-ready');
+      if (instant) { void ind.offsetWidth; window.requestAnimationFrame(function () { ind.classList.add('is-anim'); }); }
+      else ind.classList.add('is-anim');
+    };
+    var restInd = function (instant) { placeInd(navRest, instant); };
+    Array.prototype.forEach.call(navLinks, function (a) {
+      a.addEventListener('mouseenter', function () { placeInd(a, false); });
+      a.addEventListener('focus', function () { placeInd(a, false); });
+    });
+    navEl.addEventListener('mouseleave', function () { restInd(false); });
+    navEl.addEventListener('focusout', function (e) { if (!navEl.contains(e.relatedTarget)) restInd(false); });
+    window.addEventListener('resize', function () { restInd(true); });
+    if (navDesktop.addEventListener) navDesktop.addEventListener('change', function () { restInd(true); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { restInd(true); });
+    restInd(true);
+  }
+
+  /* ---------- 8b. Clients strip (v3.3): static and centred when the tiles fit; a gentle marquee only when they overflow
+     (swipe row with reduced motion). Clones are aria-hidden and inert. Re-measured on resize. ---------- */
+  (function () {
+    var view = document.querySelector('[data-clients]');
+    var ul = view && view.querySelector('.clients__row');
+    if (!ul) return;
+    var timer;
+    function setup() {
+      Array.prototype.forEach.call(ul.querySelectorAll('[data-clone]'), function (c) { c.parentNode.removeChild(c); });
+      ul.classList.remove('is-marquee', 'is-scroll'); view.classList.remove('is-marquee', 'is-scroll');
+      var items = Array.prototype.slice.call(ul.children), setW = 0;
+      items.forEach(function (li) { setW += li.offsetWidth + parseFloat(getComputedStyle(li).marginInlineEnd || 0); });
+      var fits = (setW - 1) <= view.clientWidth + parseFloat(getComputedStyle(items[items.length - 1]).marginInlineEnd || 0);
+      if (fits) return;
+      if (reduceMotion.matches) { ul.classList.add('is-scroll'); view.classList.add('is-scroll'); return; }
+      ul.classList.add('is-marquee'); view.classList.add('is-marquee');
+      items.forEach(function (li) {
+        var c = li.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true'); c.setAttribute('inert', ''); c.setAttribute('data-clone', '');
+        ul.appendChild(c);
+      });
+      ul.style.setProperty('--mq-dur', Math.round(setW / 28) + 's');
+    }
+    setup();
+    window.addEventListener('resize', function () { clearTimeout(timer); timer = setTimeout(setup, 150); });
+    if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', setup);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setup);
+  })();
 
   /* ---------- 9. Global motion toggle (pill at the inline-start bottom corner). aria-pressed = motion is paused.
      Pressing it applies the saved/new state to every hook registered above (hero, team) and to the CSS class. Hidden with reduced motion. */
