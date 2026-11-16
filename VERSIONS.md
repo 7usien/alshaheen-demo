@@ -20,5 +20,6 @@ is committed in `design/v4-canvas/`; use `git log -- design/v4-canvas` to list t
 | 3 | Design canvas snapshot: review round 4 | Simpler CTA and form, sector autoplay (3 s), floating "30" team card, softer capabilities card |
 | 4 | Design canvas snapshot: review round 5 | Smaller hero title, glass team badge, blueprint CTA background |
 | 5 | Design canvas: softer CTA wireframe and scan line, move team badge | Lighter wireframe and scan line, badge moved |
+| 6 (live demo) | v4 demo: scroll motion, 3-column team, photo CTA, tag fix | Fixed service tags and team columns; CTA uses a real project photo; scroll reveals, headline words, counters, scroll progress, parallax, card spotlight |
 
 The plan and decisions are in `REDESIGN-PLAN.md`.
