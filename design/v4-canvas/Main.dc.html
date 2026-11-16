@@ -187,9 +187,18 @@ a{color:#B04C14}a:hover{color:#8E3C0F}
 /* ---------- CTA animated gradient ---------- */
 .ctaglow{position:absolute;width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(218,97,33,.40) 0%,rgba(176,76,20,.16) 42%,rgba(176,76,20,0) 70%);animation:glowDrift 14s ease-in-out infinite alternate}
 @keyframes glowDrift{from{transform:translate(0,0) scale(1)}to{transform:translate(-140px,70px) scale(1.12)}}
-.ctaarc{position:absolute;border-radius:50%;border:1px solid rgba(242,160,107,.16);animation:arcPulse 9s ease-in-out infinite alternate}
-.ctaarc.a2{border-color:rgba(242,160,107,.09);animation-delay:1.5s}
-@keyframes arcPulse{from{transform:scale(1);opacity:.6}to{transform:scale(1.06);opacity:1}}
+.floor{position:absolute;left:-30%;right:-30%;bottom:-6%;height:62%;background-image:linear-gradient(rgba(242,160,107,.20) 1px,transparent 1px),linear-gradient(90deg,rgba(242,160,107,.20) 1px,transparent 1px);background-size:72px 72px;transform:perspective(620px) rotateX(66deg);transform-origin:bottom center;-webkit-mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.6) 40%,transparent 88%);mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.6) 40%,transparent 88%);animation:floorMove 5s linear infinite}
+@keyframes floorMove{from{background-position:0 0}to{background-position:0 72px}}
+.wire *{fill:none;stroke:#F2A06B;stroke-width:1.4;stroke-dasharray:1;stroke-dashoffset:1;animation:wireDraw 10s cubic-bezier(.65,0,.35,1) infinite}
+.wire .g{stroke:#DA6121;stroke-opacity:.45;stroke-width:1}
+.wire :nth-child(2){animation-delay:.25s}.wire :nth-child(3){animation-delay:.5s}.wire :nth-child(4){animation-delay:.8s}.wire :nth-child(5){animation-delay:1.1s}.wire :nth-child(6){animation-delay:1.4s}.wire :nth-child(7){animation-delay:1.7s}.wire :nth-child(8){animation-delay:2s}.wire :nth-child(9){animation-delay:2.3s}.wire :nth-child(10){animation-delay:2.6s}.wire :nth-child(11){animation-delay:2.9s}.wire :nth-child(12){animation-delay:3.2s}
+@keyframes wireDraw{0%{stroke-dashoffset:1;opacity:0}6%{opacity:1}45%{stroke-dashoffset:0}80%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.ctascan{position:absolute;inset-inline:0;height:1px;background:linear-gradient(90deg,transparent,rgba(242,160,107,.9),transparent);box-shadow:0 0 22px 3px rgba(242,160,107,.35);animation:ctaScan 7s ease-in-out infinite}
+@keyframes ctaScan{0%{top:12%;opacity:0}15%{opacity:1}85%{opacity:1}100%{top:92%;opacity:0}}
+.teambadge{position:absolute;z-index:3;right:-22px;top:42%;padding:18px 22px;border-radius:24px;min-width:210px;display:flex;flex-direction:column;gap:12px;color:#2A2929;background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,247,240,.66));backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid rgba(255,255,255,.95);box-shadow:0 30px 60px -24px rgba(176,76,20,.45),inset 0 1px 0 #FFFFFF;overflow:hidden;isolation:isolate}
+.teambadge::before{content:"";position:absolute;width:180px;height:180px;top:-90px;left:-60px;border-radius:50%;background:radial-gradient(circle,rgba(218,97,33,.30),rgba(218,97,33,0) 70%);z-index:-1;animation:badgeGlow 6s ease-in-out infinite alternate}
+.teambadge::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(176,76,20,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(176,76,20,.07) 1px,transparent 1px);background-size:16px 16px;-webkit-mask-image:linear-gradient(to left,#000,transparent 70%);mask-image:linear-gradient(to left,#000,transparent 70%);z-index:-1}
+@keyframes badgeGlow{from{transform:translate(0,0)}to{transform:translate(120px,80px)}}
 .field{background:rgba(14,13,12,.55);border:1px solid rgba(255,255,255,.16);color:#FFFFFF;border-radius:14px;height:52px;padding:0 16px;font:inherit;font-size:15px;width:100%;transition:border-color .3s,background .3s}
 .field:hover{border-color:rgba(255,255,255,.3)}
 .field:focus{outline:2px solid #F2A06B;outline-offset:2px;border-color:transparent;background:rgba(14,13,12,.75)}
@@ -224,7 +233,7 @@ textarea.field{height:auto;min-height:110px;padding:14px 16px;resize:vertical;li
  .bar .ctatop{display:none}
 }
 @media (prefers-reduced-motion: reduce){
- .slide,.slide img,.slide .bpgrid,.cap,.prog,.scan,.marq,.asco,.si,.st,.vcol,.ctaglow,.ctaarc,.floaty,.floaty2,.inA,.inB,.inA img,.inB img{animation:none}
+ .slide,.slide img,.slide .bpgrid,.cap,.prog,.scan,.marq,.asco,.si,.st,.vcol,.ctaglow,.floor,.wire *,.ctascan,.teambadge::before,.floaty,.floaty2,.inA,.inB,.inA img,.inB img{animation:none}
  .slide{opacity:0}.slide.d0{opacity:1}.slide .bpgrid{opacity:0}.cap{opacity:0}.cap.d0{opacity:1}
  .navlink .t{transition:none}.navlink:hover .t{transform:none}
 }
@@ -274,7 +283,7 @@ textarea.field{height:auto;min-height:110px;padding:14px 16px;resize:vertical;li
         <span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #DA6121; box-shadow: 0 0 0 4px rgba(218,97,33,.3)"></span>
         مكتب استشارات هندسية · الكويت منذ 1992
       </p>
-      <h1 id="hero-title" style="margin: 0; font-weight: 600; font-size: clamp(40px, 5.6vw, 80px); line-height: 1.12; letter-spacing: -0.01em">نصمّم ونُشرف على<br>مشاريع <span style="color: #F2A06B">تبقى.</span></h1>
+      <h1 id="hero-title" style="margin: 0; font-weight: 600; font-size: clamp(34px, 4.2vw, 60px); line-height: 1.18; letter-spacing: -0.01em">نصمّم ونُشرف على<br>مشاريع <span style="color: #F2A06B">تبقى.</span></h1>
       <p style="margin: 0; font-size: 19px; font-weight: 300; line-height: 1.85; color: #E9E3DE; max-width: 540px">من أول خط في المخطط حتى تسليم المبنى: تخطيط وعمارة وهندسة إنشائية وميكانيكية وكهربائية وإدارة مشاريع، لجهات حكومية وخاصة.</p>
       <div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 6px">
         <a class="btn-ember" href="#contact" style="display: inline-flex; align-items: center; gap: 10px; height: 58px; padding: 0 30px; border-radius: 999px; font-weight: 500; font-size: 17px">
@@ -569,13 +578,13 @@ textarea.field{height:auto;min-height:110px;padding:14px 16px;resize:vertical;li
       <p style="margin: 0; font-size: 13px; color: #5E5853">مرّر فوق الفريق لإيقاف الحركة.</p>
     </div>
     <div style="position: relative; flex: 1 1 640px; min-width: 0">
-    <div class="floaty" style="position: absolute; z-index: 3; right: -22px; top: 42%; padding: 18px 22px; border-radius: 22px; background: #141312; color: #FFFFFF; box-shadow: 0 30px 60px -24px rgba(20,19,18,.6); display: flex; flex-direction: column; gap: 12px; min-width: 200px">
-      <span style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 46px; font-weight: 600; line-height: 1; color: #F2A06B">30</span><span style="font-size: 14px; color: #D9D2CC">عضواً في<br>فريق العمل</span></span>
+    <div class="teambadge floaty">
+      <span style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 46px; font-weight: 600; line-height: 1; color: #B04C14">30</span><span style="font-size: 14px; color: #5E5853">عضواً في<br>فريق العمل</span></span>
       <span aria-hidden="true" style="display: flex; align-items: center">
-        <img src="/_blob/901325c8bd8a88ded011c338b466f993" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: top; background: #3A2A20; border: 2px solid #141312">
-        <img src="/_blob/4c1d01184b84432bc60accba5cfe0f65" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: top; background: #3A2A20; border: 2px solid #141312; margin-inline-start: -10px">
-        <img src="/_blob/30368e427179b2f30f991862a3075f1f" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: top; background: #3A2A20; border: 2px solid #141312; margin-inline-start: -10px">
-        <span class="en" style="width: 34px; height: 34px; border-radius: 50%; background: #DA6121; border: 2px solid #141312; margin-inline-start: -10px; display: grid; place-items: center; font-size: 11px; font-weight: 600">+27</span>
+        <img src="/_blob/901325c8bd8a88ded011c338b466f993" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: top; background: #F3E3D6; border: 2px solid #FFFFFF">
+        <img src="/_blob/4c1d01184b84432bc60accba5cfe0f65" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: top; background: #F3E3D6; border: 2px solid #FFFFFF; margin-inline-start: -10px">
+        <img src="/_blob/30368e427179b2f30f991862a3075f1f" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: top; background: #F3E3D6; border: 2px solid #FFFFFF; margin-inline-start: -10px">
+        <span class="en" style="width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #DA6121, #B04C14); color: #FFFFFF; border: 2px solid #FFFFFF; margin-inline-start: -10px; display: grid; place-items: center; font-size: 11px; font-weight: 600">+27</span>
       </span>
     </div>
     <div class="vwrap">
@@ -719,8 +728,23 @@ textarea.field{height:auto;min-height:110px;padding:14px 16px;resize:vertical;li
 <section id="contact" aria-labelledby="cta-title" style="position: relative; overflow: hidden; color: #FFFFFF; padding: 112px 0; background: #141312; isolation: isolate">
   <div aria-hidden="true" style="position: absolute; inset: 0; overflow: hidden; z-index: -1; background: linear-gradient(160deg, #1B1917 0%, #141312 55%, #100F0E 100%)">
     <div class="ctaglow" style="top: -300px; right: -220px"></div>
-    <div class="ctaarc" style="width: 900px; height: 900px; left: -420px; bottom: -520px"></div>
-    <div class="ctaarc a2" style="width: 1200px; height: 1200px; left: -570px; bottom: -670px"></div>
+    <div class="floor"></div>
+    <svg class="wire" viewBox="0 -250 760 760" style="position: absolute; right: 2%; bottom: -40px; width: 560px; height: auto; opacity: .55">
+      <polygon class="g" pathLength="1" points="330,82 712.8,303 388.9,490 6.1,269"></polygon>
+      <polygon pathLength="1" points="123.9,269 388.9,422 388.9,347.2 123.9,194.2"></polygon>
+      <polygon pathLength="1" points="595,303 388.9,422 388.9,347.2 595,228.2"></polygon>
+      <polygon pathLength="1" points="330,75.2 595,228.2 388.9,347.2 123.9,194.2"></polygon>
+      <polygon pathLength="1" points="226.9,202.7 374.2,287.7 374.2,-65.9 226.9,-150.9"></polygon>
+      <polygon pathLength="1" points="491.9,219.7 374.2,287.7 374.2,-65.9 491.9,-133.9"></polygon>
+      <polygon pathLength="1" points="344.7,-218.9 491.9,-133.9 374.2,-65.9 226.9,-150.9"></polygon>
+      <polyline pathLength="1" points="226.9,134.7 374.2,219.7 491.9,151.7"></polyline>
+      <polyline pathLength="1" points="226.9,66.7 374.2,151.7 491.9,83.7"></polyline>
+      <polyline pathLength="1" points="226.9,-1.3 374.2,83.7 491.9,15.7"></polyline>
+      <polyline pathLength="1" points="226.9,-69.3 374.2,15.7 491.9,-52.3"></polyline>
+      <polyline pathLength="1" points="300.6,245.2 300.6,-108.4"></polyline>
+    </svg>
+    <div class="ctascan"></div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(20,19,18,.55) 0%, rgba(20,19,18,0) 45%)"></div>
   </div>
   <div style="position: relative; max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
     <div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
