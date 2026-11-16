@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!--
+    DEMO v4 (homepage redesign "from blueprint to building") — for client review only.
+    The block between "SEO block start/end" mirrors the protected Smarty block of production
+    (header.tpl + includes/seo.php): canonical and hreflang point to the live site on purpose.
+    This demo itself is noindex (meta robots below + robots.txt).
+  -->
+  <!-- SEO block start -->
+  <meta name="description" content="Engineering consultants in Kuwait since 1992: planning, architecture, structural, mechanical and electrical engineering and project management for public and private clients.">
+  <title>Dar Al-Shaheen Consultants | Engineering in Kuwait since 1992</title>
+  <link rel="canonical" href="https://alshaheenco.com/en/">
+  <link rel="alternate" hreflang="ar" href="https://alshaheenco.com/ar/">
+  <link rel="alternate" hreflang="en" href="https://alshaheenco.com/en/">
+  <link rel="alternate" hreflang="x-default" href="https://alshaheenco.com/ar/">
+  <meta property="og:site_name" content="Al-Shaheen Consultants">
+  <meta property="og:title" content="Dar Al-Shaheen Consultants | Engineering in Kuwait since 1992">
+  <meta property="og:description" content="Engineering consultants in Kuwait since 1992: planning, architecture, structural, mechanical and electrical engineering and project management for public and private clients.">
+  <meta property="og:url" content="https://alshaheenco.com/en/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ar_AR">
+  <meta property="og:image" content="https://alshaheenco.com/resize.php?file=project_231_1684842470.jpg&amp;width=1200&amp;height=630&amp;quality=82">
+  <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Fintas Marina Project">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dar Al-Shaheen Consultants | Engineering in Kuwait since 1992">
+  <meta name="twitter:description" content="Engineering consultants in Kuwait since 1992: planning, architecture, structural, mechanical and electrical engineering and project management for public and private clients.">
+  <meta name="twitter:image" content="https://alshaheenco.com/resize.php?file=project_231_1684842470.jpg&amp;width=1200&amp;height=630&amp;quality=82">
+  <meta name="twitter:image:alt" content="Fintas Marina Project">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://alshaheenco.com/#organization","name":"Al-Shaheen Consultants","alternateName":"Dar Al-Shaheen Consultants","url":"https://alshaheenco.com/en/","logo":"https://alshaheenco.com/templates/default/images/logo.png","foundingDate":"1992","contactPoint":{"@type":"ContactPoint","contactType":"customer service","availableLanguage":["Arabic","English"],"telephone":"+96522412378","email":"info@alshaheenco.com"},"sameAs":["https://www.facebook.com/AlShaheenCo","https://www.instagram.com/alshaheen_consult/","https://www.linkedin.com/company/al-shaheen-consultants-asco/"]},{"@type":"WebSite","@id":"https://alshaheenco.com/#website","url":"https://alshaheenco.com/en/","name":"Al-Shaheen Consultants","inLanguage":"en","publisher":{"@id":"https://alshaheenco.com/#organization"}}]}</script>
+  <!-- SEO block end -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0E0D0C">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap">
+  <link rel="preload" as="image" href="../../images/36d944377cd7.webp" imagesrcset="../../images/d55b2d3cca76.webp 720w, ../../images/79c0d71a6c95.webp 1200w, ../../images/36d944377cd7.webp 1500w" imagesizes="100vw" fetchpriority="high">
+  <link rel="stylesheet" href="../assets/home-v4.css">
+  <script src="../assets/home-v4.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- ================= STICKY TOP BAR ================= -->
+<header class="topbar">
+  <div class="bar">
+    <a class="bar__logo" href="./" aria-label="Dar Al-Shaheen Consultants, home">
+      <img src="../../images/300eaf83ab4d.webp" width="1920" height="600" alt="Dar Al-Shaheen Consultants">
+    </a>
+    <nav class="bar__nav" aria-label="Main menu">
+      <a class="navlink" href="./" aria-current="page"><span class="t" data-t="Home">Home</span></a>
+      <a class="navlink" href="#about"><span class="t" data-t="About">About</span></a>
+      <a class="navlink" href="#services"><span class="t" data-t="Services">Services</span></a>
+      <a class="navlink" href="#projects"><span class="t" data-t="Projects">Projects</span></a>
+      <a class="navlink" href="#team"><span class="t" data-t="Team">Team</span></a>
+      <a class="navlink" href="#news"><span class="t" data-t="News">News</span></a>
+      <a class="navlink" href="#contact"><span class="t" data-t="Contact">Contact</span></a>
+    </nav>
+    <div class="bar__actions">
+      <a class="langbtn" href="../" hreflang="ar" lang="ar" aria-label="النسخة العربية">ع</a>
+      <a class="btn btn-ember btn--sm ctatop" href="#contact">Request a quote</a>
+      <button class="menubtn" type="button" aria-controls="menu" aria-expanded="false" aria-label="Open menu">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M10 17h10"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="menu" hidden>
+  <div class="drawer__scrim" data-close-menu></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer__top">
+      <img src="../../images/300eaf83ab4d.webp" width="1920" height="600" alt="" style="height:34px;width:auto">
+      <button class="menubtn" style="display:inline-grid" type="button" data-close-menu aria-label="Close menu">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <a class="dl" href="./" aria-current="page">Home</a>
+    <a class="dl" href="#about">About</a>
+    <a class="dl" href="#services">Services</a>
+    <a class="dl" href="#projects">Projects</a>
+    <a class="dl" href="#team">Team</a>
+    <a class="dl" href="#news">News</a>
+    <a class="dl" href="#contact">Contact</a>
+    <div class="drawer__foot">
+      <a class="btn btn-ember" href="#contact">Request a quote</a>
+      <a class="btn btn-glass" href="../" hreflang="ar" lang="ar">العربية</a>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ================= 1. HERO ================= -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__media" aria-hidden="true">
+    <div class="slide d0"><img src="../../images/36d944377cd7.webp" srcset="../../images/d55b2d3cca76.webp 720w, ../../images/79c0d71a6c95.webp 1200w, ../../images/36d944377cd7.webp 1500w" sizes="100vw" width="1500" height="1061" alt="" fetchpriority="high"><div class="bpgrid"></div></div>
+    <div class="slide d1"><img src="../../images/2e47e9e2b8a4.webp" srcset="../../images/f84b779659b3.webp 720w, ../../images/59f52d4f92d5.webp 1200w, ../../images/2e47e9e2b8a4.webp 1500w" sizes="100vw" width="1500" height="967" alt="" loading="lazy" decoding="async"><div class="bpgrid"></div></div>
+    <div class="slide d2"><img src="../../images/287af2a9f2e4.webp" srcset="../../images/dfed7add32fb.webp 480w, ../../images/e10c256fd13f.webp 800w, ../../images/287af2a9f2e4.webp 1120w" sizes="100vw" width="1120" height="700" alt="" loading="lazy" decoding="async"><div class="bpgrid"></div></div>
+    <div class="slide d3"><img src="../../images/566ccf7e549f.webp" srcset="../../images/2226898852d8.webp 720w, ../../images/94e2bf458c4f.webp 1200w, ../../images/566ccf7e549f.webp 1500w" sizes="100vw" width="1500" height="1056" alt="" loading="lazy" decoding="async"><div class="bpgrid"></div></div>
+    <div class="scan"></div>
+    <div class="hero__shade-side"></div>
+    <div class="hero__shade-v"></div>
+  </div>
+
+  <div class="container hero__body">
+    <div class="hero__text">
+      <p class="chip-dark"><span class="dot" aria-hidden="true"></span>Engineering consultancy · Kuwait since 1992</p>
+      <h1 id="hero-title">We design and deliver<br>projects that <span>last.</span></h1>
+      <p class="hero__lead">From the first line on the drawing to the handover of the building: planning, architecture, structural, mechanical and electrical engineering and project management, for public and private clients.</p>
+      <div class="hero__ctas">
+        <a class="btn btn-ember btn--lg" href="#contact">Request a quote
+          <svg class="fwd" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg>
+        </a>
+        <a class="btn btn-glass btn--lg" href="#projects">Explore projects</a>
+      </div>
+    </div>
+    <div class="hero__aside">
+      <div class="capbox" aria-live="off">
+        <div class="cap d0"><span class="cap__k">01 · Educational &amp; health projects</span><span class="cap__t">Al Gonquin College Kuwait</span><span class="cap__m">East Al Naseem · 49,000 m² · 2025</span></div>
+        <div class="cap d1" aria-hidden="true"><span class="cap__k">02 · Entertainment &amp; sports projects</span><span class="cap__t">Abdulaziz Al-Khateeb Sports Hall</span><span class="cap__m">Mansouriya · Al-Arabi Sports Club</span></div>
+        <div class="cap d2" aria-hidden="true"><span class="cap__k">03 · Mechanical engineering</span><span class="cap__t">Makkah Hotel</span><span class="cap__m">A mechanical engineering project</span></div>
+        <div class="cap d3" aria-hidden="true"><span class="cap__k">04 · Entertainment &amp; sports projects</span><span class="cap__t">Girls Centre</span><span class="cap__m">Saad Al-Abdullah</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container hero__foot">
+    <ol class="progs" aria-label="Featured projects">
+      <li><span class="track"><span class="prog d0"></span></span>Al Gonquin College</li>
+      <li><span class="track"><span class="prog d1"></span></span>Al-Khateeb Hall</li>
+      <li><span class="track"><span class="prog d2"></span></span>Makkah Hotel</li>
+      <li><span class="track"><span class="prog d3"></span></span>Girls Centre</li>
+    </ol>
+    <button class="iconbtn" type="button" data-motion-toggle aria-pressed="false" aria-label="Pause motion">
+      <svg class="i-pause" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+      <svg class="i-play" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ================= 2. STATS + CLIENTS ================= -->
+<section class="trust" aria-labelledby="clients-title">
+  <div class="container">
+    <ul class="stats" aria-label="Dar Al-Shaheen in numbers">
+      <li><span class="n"><b>+</b>34</span><span class="l">years</span></li>
+      <li><span class="n">56</span><span class="l">projects</span></li>
+      <li><span class="n">7</span><span class="l">disciplines</span></li>
+      <li><span class="n">6</span><span class="l">sectors</span></li>
+      <li><span class="n">30</span><span class="l">team members</span></li>
+    </ul>
+    <div class="clients">
+      <h2 id="clients-title">Some of our clients</h2>
+      <div class="marq-wrap">
+        <ul class="marq">
+          <li>Ministry of Public Works</li><li>Kuwait Municipality</li><li>Public Authority for Housing Welfare</li><li>Ministry of Education</li><li>Ministry of Health</li><li>Public Authority for Sports</li>
+          <li aria-hidden="true">Ministry of Public Works</li><li aria-hidden="true">Kuwait Municipality</li><li aria-hidden="true">Public Authority for Housing Welfare</li><li aria-hidden="true">Ministry of Education</li><li aria-hidden="true">Ministry of Health</li><li aria-hidden="true">Public Authority for Sports</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. SERVICES ================= -->
+<section class="section services" id="services" aria-labelledby="services-title">
+  <div class="container">
+    <header class="head">
+      <div class="head__main">
+        <p class="eyebrow">Our services</p>
+        <h2 class="h2" id="services-title">Seven engineering disciplines<br>under one roof</h2>
+      </div>
+      <p class="lead">Every discipline works on the same project, as one team with one responsibility. Hover a discipline to see what it covers.</p>
+    </header>
+    <div class="bento">
+      <a class="svc c6" href="#architecture">
+        <img src="../../images/0a9ee62337e9.webp" srcset="../../images/953a731ff05c.webp 480w, ../../images/0a9ee62337e9.webp 800w, ../../images/eb16cf212ed9.webp 1120w" sizes="(max-width: 960px) 100vw, 50vw" width="1120" height="700" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="grain"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="svc__top"><span><span class="svc__num en">01</span><span class="pill-glass">43 projects</span></span><span class="circle" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+          <div><h3>Architecture</h3><p>Complete architectural design, from first concept to construction drawings.</p>
+            <div class="more"><div><ul class="chips"><li>Architectural design</li><li>Interior design</li><li>Building function development</li><li>Building rehabilitation</li><li>Cost estimating</li></ul><p class="src">Photo: Khafji Commercial Project</p></div></div></div>
+        </div>
+      </a>
+      <a class="svc c3" href="#structural">
+        <img src="../../images/0146ad87ea74.webp" srcset="../../images/02bc19cc7766.webp 480w, ../../images/0146ad87ea74.webp 800w, ../../images/dd8303cdc88b.webp 1120w" sizes="(max-width: 960px) 50vw, 25vw" width="1120" height="700" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="grain"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="svc__top"><span><span class="svc__num en">02</span><span class="pill-glass">43 projects</span></span><span class="circle" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+          <div><h3>Structural engineering</h3><p>Safe, economical structures: analysis and design.</p>
+            <div class="more"><div><ul class="chips"><li>Structural analysis</li><li>Structural design</li><li>Retaining walls</li><li>Bridges</li></ul><p class="src">Photo: Salhiya Tower</p></div></div></div>
+        </div>
+      </a>
+      <a class="svc c3" href="#electrical">
+        <img src="../../images/5fb3b48ed50f.webp" srcset="../../images/f3c57007a328.webp 480w, ../../images/5fb3b48ed50f.webp 800w, ../../images/93130a2128b9.webp 1120w" sizes="(max-width: 960px) 50vw, 25vw" width="1120" height="700" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="grain"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="svc__top"><span><span class="svc__num en">03</span><span class="pill-glass">43 projects</span></span><span class="circle" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+          <div><h3>Electrical engineering</h3><p>Power, lighting, low-current and smart building systems.</p>
+            <div class="more"><div><ul class="chips"><li>Utilities assessment</li><li>Energy calculation</li><li>Cost analysis</li></ul><p class="src">Photo: Yasmeen Tower</p></div></div></div>
+        </div>
+      </a>
+      <a class="svc c4" href="#planning">
+        <img src="../../images/0da1df4e9aef.webp" srcset="../../images/d181e17a38a6.webp 480w, ../../images/6eaf51b46007.webp 800w, ../../images/0da1df4e9aef.webp 1120w" sizes="(max-width: 960px) 50vw, 33vw" width="1120" height="700" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="grain"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="svc__top"><span><span class="svc__num en">04</span><span class="pill-glass">23 projects</span></span><span class="circle" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+          <div><h3>Planning</h3><p>Master plans, subdivision, site analysis and feasibility studies.</p>
+            <div class="more"><div><ul class="chips"><li>Structural planning</li><li>Subdivision projects</li><li>Site analysis</li><li>Feasibility studies</li></ul><p class="src">Photo: Pedestrian and vehicle security gates development</p></div></div></div>
+        </div>
+      </a>
+      <a class="svc c4" href="#project-management">
+        <img src="../../images/69d40f5d1f97.webp" srcset="../../images/19ab439e3e7c.webp 1200w, ../../images/69d40f5d1f97.webp 1920w" sizes="(max-width: 960px) 50vw, 33vw" width="1920" height="1080" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="grain"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="svc__top"><span><span class="svc__num en">05</span><span class="pill-glass">12 projects</span></span><span class="circle" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+          <div><h3>Project management</h3><p>Cost, schedule and quality control through to handover.</p>
+            <div class="more"><div><ul class="chips"><li>Cost estimating</li><li>Claims analysis</li><li>Project scheduling</li><li>Property assessment</li></ul><p class="src">Photo: South Al-Mutlaa infrastructure</p></div></div></div>
+        </div>
+      </a>
+      <a class="svc c4" href="#mechanical">
+        <img src="../../images/287af2a9f2e4.webp" srcset="../../images/dfed7add32fb.webp 480w, ../../images/e10c256fd13f.webp 800w, ../../images/287af2a9f2e4.webp 1120w" sizes="(max-width: 960px) 50vw, 33vw" width="1120" height="700" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="grain"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="svc__top"><span><span class="svc__num en">06</span><span class="pill-glass">43 projects</span></span><span class="circle" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+          <div><h3>Mechanical engineering</h3><p>HVAC, ventilation, plumbing and fire protection.</p>
+            <div class="more"><div><ul class="chips"><li>Central air conditioning</li><li>Commercial kitchens</li><li>Digital control systems</li></ul><p class="src">Photo: Makkah Hotel</p></div></div></div>
+        </div>
+      </a>
+      <a class="svc c8" href="#other-services">
+        <img src="../../images/0fef83f0914c.webp" srcset="../../images/93ffef9aee23.webp 480w, ../../images/0fef83f0914c.webp 800w, ../../images/322b930a44f8.webp 1119w" sizes="(max-width: 960px) 100vw, 66vw" width="1119" height="700" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="grain"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="svc__top"><span><span class="svc__num en">07</span><span class="pill-glass">2 projects</span></span><span class="circle" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+          <div><h3>Other services</h3><p>Landscape design, traffic and environmental studies, and value engineering.</p>
+            <div class="more"><div><ul class="chips"><li>Landscape design</li><li>Traffic and road studies</li><li>Environmental studies</li><li>Value engineering</li></ul><p class="src">Photo: Salmiya Park design project</p></div></div></div>
+        </div>
+      </a>
+      <div class="svc-cta">
+        <div class="orb" aria-hidden="true" style="width:260px;height:260px;background:rgba(218,97,33,.45);top:-80px;left:-60px"></div>
+        <div><p class="t">Need more than one discipline?</p><p class="s">One team covers all seven disciplines, from site study to construction supervision.</p></div>
+        <a class="btn btn-ember" href="#contact">Request a quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4. PROJECTS ================= -->
+<section class="section projects" id="projects" aria-labelledby="projects-title">
+  <div class="orb" aria-hidden="true" style="width:520px;height:520px;background:rgba(218,97,33,.16);top:80px;right:-160px"></div>
+  <div class="container" style="position:relative">
+    <header class="head">
+      <div class="head__main">
+        <p class="eyebrow on-dark">Projects</p>
+        <h2 class="h2" id="projects-title" style="color:#FFFFFF">Projects that prove<br>our expertise</h2>
+      </div>
+      <p class="bignum"><b aria-hidden="true">56</b><span>projects delivered<br>across 6 sectors</span></p>
+    </header>
+    <div class="filterbar">
+      <div class="seg" role="group" aria-label="Filter projects by sector" data-filter-group>
+        <button type="button" aria-pressed="true" data-filter="all">All <span class="en">6</span></button>
+        <button type="button" aria-pressed="false" data-filter="edu">Educational &amp; health <span class="en">1</span></button>
+        <button type="button" aria-pressed="false" data-filter="infra">Planning &amp; infrastructure <span class="en">2</span></button>
+        <button type="button" aria-pressed="false" data-filter="sport">Entertainment &amp; sports <span class="en">2</span></button>
+        <button type="button" aria-pressed="false" data-filter="com">Commercial <span class="en">1</span></button>
+      </div>
+      <a class="alllink" href="#all-projects">All projects (56) <span aria-hidden="true">→</span></a>
+    </div>
+    <p class="sr-only" id="filter-status" aria-live="polite"></p>
+    <div class="gal">
+      <article class="pj g-feat" data-sector="edu">
+        <img src="../../images/36d944377cd7.webp" srcset="../../images/d55b2d3cca76.webp 720w, ../../images/79c0d71a6c95.webp 1200w, ../../images/36d944377cd7.webp 1500w" sizes="(max-width: 960px) 100vw, 66vw" width="1500" height="1061" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="pj__top"><span class="pill-glass">Educational &amp; health</span><span class="pj__idx en">01</span></div>
+          <div class="pj__bottom">
+            <div><h3><a href="#project-algonquin">Al Gonquin College Kuwait</a></h3><p class="pj__loc">East Al Naseem - Al Jahra</p>
+              <ul class="pj__meta"><li><b>49,000 m²</b>Area</li><li><b>2025</b>Year</li><li><b>East Al Naseem</b>Location</li></ul></div>
+            <span class="go" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span>
+          </div>
+        </div>
+      </article>
+      <article class="pj g-side" data-sector="sport">
+        <img src="../../images/59f52d4f92d5.webp" srcset="../../images/f84b779659b3.webp 720w, ../../images/59f52d4f92d5.webp 1200w" sizes="(max-width: 960px) 50vw, 33vw" width="1200" height="675" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="pj__top"><span class="pill-glass">Entertainment &amp; sports</span><span class="pj__idx en">02</span></div>
+          <div class="pj__bottom"><div><h3><a href="#project-khateeb">Abdulaziz Al-Khateeb Sports Hall</a></h3><p class="pj__loc">Mansouriya · Al-Arabi Club</p></div>
+            <span class="go" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+        </div>
+      </article>
+      <article class="pj g-side" data-sector="com">
+        <img src="../../images/0a9ee62337e9.webp" srcset="../../images/953a731ff05c.webp 480w, ../../images/0a9ee62337e9.webp 800w, ../../images/eb16cf212ed9.webp 1120w" sizes="(max-width: 960px) 50vw, 33vw" width="1120" height="700" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="pj__top"><span class="pill-glass">Commercial</span><span class="pj__idx en">03</span></div>
+          <div class="pj__bottom"><div><h3><a href="#project-khafji">Khafji Commercial Project</a></h3><p class="pj__loc">Khafji · Saudi Arabia</p></div>
+            <span class="go" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+        </div>
+      </article>
+      <article class="pj g-third" data-sector="infra">
+        <img src="../../images/19ab439e3e7c.webp" srcset="../../images/53f9a4d8d8bc.webp 720w, ../../images/19ab439e3e7c.webp 1200w" sizes="(max-width: 960px) 50vw, 33vw" width="1200" height="675" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="pj__top"><span class="pill-glass">Planning &amp; infrastructure</span><span class="pj__idx en">04</span></div>
+          <div class="pj__bottom"><div><h3><a href="#project-mutlaa">South Al-Mutlaa infrastructure supervision</a></h3><p class="pj__loc">Al Mutlaa City</p></div>
+            <span class="go" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+        </div>
+      </article>
+      <article class="pj g-third" data-sector="sport">
+        <img src="../../images/94e2bf458c4f.webp" srcset="../../images/2226898852d8.webp 720w, ../../images/94e2bf458c4f.webp 1200w" sizes="(max-width: 960px) 50vw, 33vw" width="1199" height="675" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="pj__top"><span class="pill-glass">Entertainment &amp; sports</span><span class="pj__idx en">05</span></div>
+          <div class="pj__bottom"><div><h3><a href="#project-girls-center">Girls Centre</a></h3><p class="pj__loc">Saad Al-Abdullah</p></div>
+            <span class="go" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+        </div>
+      </article>
+      <article class="pj g-third" data-sector="infra">
+        <img src="../../images/6eaf51b46007.webp" srcset="../../images/d181e17a38a6.webp 480w, ../../images/6eaf51b46007.webp 800w, ../../images/0da1df4e9aef.webp 1120w" sizes="(max-width: 960px) 50vw, 33vw" width="1120" height="700" alt="" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="shade"></span>
+        <div class="card-body">
+          <div class="pj__top"><span class="pill-glass">Planning &amp; infrastructure</span><span class="pj__idx en">06</span></div>
+          <div class="pj__bottom"><div><h3><a href="#project-gates">Security gates development</a></h3><p class="pj__loc">Shuaiba Industrial Area</p></div>
+            <span class="go" aria-hidden="true"><svg class="fwd" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. ABOUT ================= -->
+<section class="section about" id="about" aria-labelledby="about-title">
+  <p class="about__deco" aria-hidden="true">1992</p>
+  <div class="container about__grid">
+    <figure class="founder">
+      <div class="founder__arch" aria-hidden="true"><i class="g1"></i><i class="g2"></i><i class="g3"></i></div>
+      <img class="founder__img" src="../../images/50a7288d73a5.webp" width="652" height="972" alt="Dr. Qutaiba M. Al Shaheen, Managing Principal" loading="lazy" decoding="async">
+      <figcaption class="founder__card floaty">
+        <span class="row"><span class="bar-acc" aria-hidden="true"></span><span><span class="nm">Dr. Qutaiba M. Al Shaheen</span><span class="rl">Managing Principal</span></span></span>
+        <span class="co">Dar Al-Shaheen Consultants</span>
+      </figcaption>
+      <p class="founder__chip floaty2"><b>+34</b><span>years of experience</span></p>
+    </figure>
+    <div class="about__text">
+      <p class="eyebrow">About</p>
+      <h2 class="h2" id="about-title">Three decades of engineering<br>in <span>Kuwait and the region</span></h2>
+      <p class="about__p">Dar Al-Shaheen Consultants was established in 1992. Since then the firm has kept growing, expanding its expertise and serving a wide range of clients with complete architectural and engineering services, becoming one of the leading consulting offices in Kuwait.</p>
+      <ul class="values">
+        <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 20c0-2.4 1.1-4 3-4.5 1.6.3 3 1.9 3 4.5"/></svg></span>A multi-disciplinary team working on the same project</li>
+        <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/></svg></span>A track record with government bodies and private companies</li>
+        <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>Projects in Kuwait and Saudi Arabia</li>
+      </ul>
+      <ul class="badges" aria-label="Licences and classifications">
+        <li><span class="en" style="font-weight:600">ISO 9001</span> Quality management system</li>
+        <li>Kuwait Society of Engineers</li>
+        <li>Classified consulting office</li>
+      </ul>
+      <a class="btn btn-dark" href="#about-page" style="align-self:flex-start">Learn more about Dar Al-Shaheen <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6. HOW WE WORK ================= -->
+<section class="section how" id="how" aria-labelledby="how-title">
+  <div class="container">
+    <header class="head">
+      <div class="head__main">
+        <p class="eyebrow on-dark">How we work</p>
+        <h2 class="h2" id="how-title" style="color:#FFFFFF">From idea to handover<br>in four clear steps</h2>
+      </div>
+      <p class="lead" style="color:#B5ADA6">The same team stays with your project at every stage, so no detail gets lost between hands.</p>
+    </header>
+    <div class="how__grid">
+      <ol class="steps">
+        <li><button class="step" type="button" aria-pressed="true" data-img="../../images/c0488154a622.webp" data-alt="An engineer discussing project requirements with the client on site"><span class="step__bar"></span><span class="step__num" aria-hidden="true">01</span><span class="step__txt"><span class="step__title">Consultation and site study</span><span class="step__desc">We listen to your needs and study the site and regulations before drawing a line.</span></span></button></li>
+        <li><button class="step" type="button" aria-pressed="false" data-img="../../images/b9af0ad823f5.webp" data-alt="An architect working on design drawings and a building model"><span class="step__bar"></span><span class="step__num" aria-hidden="true">02</span><span class="step__txt"><span class="step__title">Design</span><span class="step__desc">Complete architectural design, from first concept to construction drawings.</span></span></button></li>
+        <li><button class="step" type="button" aria-pressed="false" data-img="../../images/d015d6d34e12.webp" data-alt="An engineering team reviewing structural and mechanical drawings together"><span class="step__bar"></span><span class="step__num" aria-hidden="true">03</span><span class="step__txt"><span class="step__title">Engineering coordination</span><span class="step__desc">Structure, mechanical and electrical in one coordinated, checked design.</span></span></button></li>
+        <li><button class="step" type="button" aria-pressed="false" data-img="../../images/74f0ff399f0c.webp" data-alt="A supervising engineer following construction on site"><span class="step__bar"></span><span class="step__num" aria-hidden="true">04</span><span class="step__txt"><span class="step__title">Supervision and handover</span><span class="step__desc">Site supervision with close control of quality, cost and schedule until handover.</span></span></button></li>
+      </ol>
+      <figure class="stage">
+        <img class="stage__img" src="../../images/c0488154a622.webp" width="1248" height="832" alt="An engineer discussing project requirements with the client on site" loading="lazy" decoding="async">
+        <span class="tint"></span><span class="grain"></span><span class="stage__shade"></span>
+        <div class="stage__dots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span></div>
+        <figcaption><span class="stage__t">Consultation and site study</span><span class="stage__n" aria-hidden="true"><b>01</b> / 04</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. TEAM ================= -->
+<section class="section team" id="team" aria-labelledby="team-title">
+  <div class="orb" aria-hidden="true" style="width:560px;height:560px;background:rgba(218,97,33,.18);top:-160px;left:-160px"></div>
+  <div class="orb" aria-hidden="true" style="width:420px;height:420px;background:rgba(242,160,107,.22);bottom:-140px;right:10%"></div>
+  <div class="team__dots" aria-hidden="true"></div>
+  <div class="container team__grid">
+    <div class="team__text">
+      <p class="eyebrow">Team</p>
+      <h2 class="h2" id="team-title">The engineers who lead your project</h2>
+      <p class="lead">Expertise in architecture, structures, mechanical and electrical engineering and project management, working as one team on every project.</p>
+      <a class="btn btn-dark" href="#team-page">Meet the full team <span aria-hidden="true">→</span></a>
+      <p class="team__hint">Hover over the team to pause the motion.</p>
+    </div>
+    <div class="team__stage">
+      <div class="teambadge floaty">
+        <p class="row"><b>30</b><span>team<br>members</span></p>
+        <span class="avs" aria-hidden="true"><img src="../../images/88060d55fceb.webp" alt="" width="34" height="34"><img src="../../images/2bff4c0bd0af.webp" alt="" width="34" height="34"><img src="../../images/17d67a7e487b.webp" alt="" width="34" height="34"><span>+27</span></span>
+      </div>
+      <div class="vwrap">
+        <ul class="vcol vup" aria-label="Team">
+          <li class="tm"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/88060d55fceb.webp" width="364" height="364" alt="Dr. Qutaiba M. Al Shaheen, Managing Principal" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Dr. Qutaiba M. Al Shaheen</span><span class="tm__rl">Managing Principal</span><span class="tm__ln"></span></span><span class="tm__ar" aria-hidden="true"><svg class="fwd" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div></li>
+          <li class="tm"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/17d67a7e487b.webp" width="364" height="364" alt="Eng. Hassan Shehata, Sr. Architect" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Hassan Shehata</span><span class="tm__rl">Sr. Architect</span><span class="tm__ln"></span></span><span class="tm__ar" aria-hidden="true"><svg class="fwd" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div></li>
+          <li class="tm"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/fd8ca76929f5.webp" width="364" height="364" alt="Eng. Hossam Abu Zaid, Sr. Civil Engineer" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Hossam Abu Zaid</span><span class="tm__rl">Sr. Civil Engineer</span><span class="tm__ln"></span></span><span class="tm__ar" aria-hidden="true"><svg class="fwd" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div></li>
+          <li class="tm" aria-hidden="true"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/88060d55fceb.webp" width="364" height="364" alt="" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Dr. Qutaiba M. Al Shaheen</span><span class="tm__rl">Managing Principal</span><span class="tm__ln"></span></span></div></li>
+          <li class="tm" aria-hidden="true"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/17d67a7e487b.webp" width="364" height="364" alt="" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Hassan Shehata</span><span class="tm__rl">Sr. Architect</span><span class="tm__ln"></span></span></div></li>
+          <li class="tm" aria-hidden="true"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/fd8ca76929f5.webp" width="364" height="364" alt="" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Hossam Abu Zaid</span><span class="tm__rl">Sr. Civil Engineer</span><span class="tm__ln"></span></span></div></li>
+        </ul>
+        <ul class="vcol c2 vdown" aria-label="Team, continued">
+          <li class="tm"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/2bff4c0bd0af.webp" width="364" height="364" alt="Eng. Samer A. Nasif, Project Manager" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Samer A. Nasif</span><span class="tm__rl">Project Manager</span><span class="tm__ln"></span></span><span class="tm__ar" aria-hidden="true"><svg class="fwd" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div></li>
+          <li class="tm"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/89a0770e8c07.webp" width="364" height="364" alt="Eng. Wael Ragab, Sr. Resident Civil Engineer" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Wael Ragab</span><span class="tm__rl">Sr. Resident Civil Engineer</span><span class="tm__ln"></span></span><span class="tm__ar" aria-hidden="true"><svg class="fwd" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div></li>
+          <li class="tm"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/d9bd997260ff.webp" width="364" height="364" alt="Eng. Fazal Ur Rahman, Sr. Electrical Engineer" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Fazal Ur Rahman</span><span class="tm__rl">Sr. Electrical Engineer</span><span class="tm__ln"></span></span><span class="tm__ar" aria-hidden="true"><svg class="fwd" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div></li>
+          <li class="tm" aria-hidden="true"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/2bff4c0bd0af.webp" width="364" height="364" alt="" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Samer A. Nasif</span><span class="tm__rl">Project Manager</span><span class="tm__ln"></span></span></div></li>
+          <li class="tm" aria-hidden="true"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/89a0770e8c07.webp" width="364" height="364" alt="" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Wael Ragab</span><span class="tm__rl">Sr. Resident Civil Engineer</span><span class="tm__ln"></span></span></div></li>
+          <li class="tm" aria-hidden="true"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/d9bd997260ff.webp" width="364" height="364" alt="" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Fazal Ur Rahman</span><span class="tm__rl">Sr. Electrical Engineer</span><span class="tm__ln"></span></span></div></li>
+        </ul>
+        <ul class="vcol c3 vup2" aria-label="Team, continued">
+          <li class="tm"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/89779bc2276a.webp" width="364" height="364" alt="Eng. Manhal Ghazi Ezzo, Project Manager" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Manhal Ghazi Ezzo</span><span class="tm__rl">Project Manager</span><span class="tm__ln"></span></span><span class="tm__ar" aria-hidden="true"><svg class="fwd" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div></li>
+          <li class="tm"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/e0e54e1aa0b2.webp" width="364" height="364" alt="Eng. Issam Jaber, Sr. Infrastructure Engineer" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Issam Jaber</span><span class="tm__rl">Sr. Infrastructure Engineer</span><span class="tm__ln"></span></span><span class="tm__ar" aria-hidden="true"><svg class="fwd" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span></div></li>
+          <li class="tm" aria-hidden="true"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/88060d55fceb.webp" width="364" height="364" alt="" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Dr. Qutaiba M. Al Shaheen</span><span class="tm__rl">Managing Principal</span><span class="tm__ln"></span></span></div></li>
+          <li class="tm" aria-hidden="true"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/89779bc2276a.webp" width="364" height="364" alt="" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Manhal Ghazi Ezzo</span><span class="tm__rl">Project Manager</span><span class="tm__ln"></span></span></div></li>
+          <li class="tm" aria-hidden="true"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/e0e54e1aa0b2.webp" width="364" height="364" alt="" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Eng. Issam Jaber</span><span class="tm__rl">Sr. Infrastructure Engineer</span><span class="tm__ln"></span></span></div></li>
+          <li class="tm" aria-hidden="true"><div class="tm__plat"><div class="tm__glow"></div><img class="tm__ph" src="../../images/88060d55fceb.webp" width="364" height="364" alt="" loading="lazy"></div><div class="tm__info"><span><span class="tm__nm">Dr. Qutaiba M. Al Shaheen</span><span class="tm__rl">Managing Principal</span><span class="tm__ln"></span></span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. CAPABILITIES ================= -->
+<section class="section caps" aria-labelledby="cap-title">
+  <div class="container">
+    <header class="head">
+      <div class="head__main">
+        <p class="eyebrow">Capabilities and qualification</p>
+        <h2 class="h2" id="cap-title">Proven experience,<br>ready to share with your team</h2>
+      </div>
+      <p class="lead">Two profiles updated for 2026, for tenders and pre-qualification.</p>
+    </header>
+    <div class="caps__grid">
+      <article class="capcard capcard--dark">
+        <div class="capcard__glow" aria-hidden="true"></div>
+        <div class="bookwrap" aria-hidden="true">
+          <div class="book">
+            <div class="cover" style="background:linear-gradient(160deg,#2A2522,#141312);border:1px solid rgba(242,160,107,.35);color:#FFFFFF"><img src="../../images/300eaf83ab4d.webp" width="1920" height="600" alt=""><span><span class="y" style="color:#F2A06B">2026</span><span class="t">Capabilities<br>profile</span></span></div>
+            <div class="spine" style="background:#B04C14"></div><div class="pages"></div>
+          </div>
+          <div class="bookshadow" style="background:rgba(0,0,0,.55)"></div>
+        </div>
+        <div class="capcard__txt">
+          <h3>Capabilities profile</h3>
+          <p>Our people and experience in detail, in one file ready to share with your team.</p>
+          <ul class="minis"><li><b>7</b><span>disciplines</span></li><li><b>6</b><span>sectors</span></li><li><b>+34</b><span>years</span></li></ul>
+          <div class="btns">
+            <a class="btn btn-ember btn--sm" href="#capabilities.pdf"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>Download capabilities profile <span class="en">(PDF)</span></a>
+            <a class="btn btn-glass btn--sm" href="#capabilities-view">View profile</a>
+          </div>
+        </div>
+      </article>
+      <article class="capcard capcard--light">
+        <div class="orb" aria-hidden="true" style="width:320px;height:320px;background:rgba(242,160,107,.45);top:-120px;left:-60px"></div>
+        <div class="bookwrap" aria-hidden="true">
+          <div class="book">
+            <div class="cover" style="background:linear-gradient(160deg,#FFFFFF,#EFEAE5);border:1px solid rgba(42,41,41,.10);color:#2A2929"><img src="../../images/a3e2678ad48c.webp" width="1920" height="600" alt=""><span><span class="y" style="color:#B04C14">2026</span><span class="t">Qualification<br>profile</span></span></div>
+            <div class="spine" style="background:#2A2929"></div><div class="pages"></div>
+          </div>
+          <div class="bookshadow" style="background:rgba(42,41,41,.35)"></div>
+        </div>
+        <div class="capcard__txt">
+          <h3>Qualification profile</h3>
+          <p>The office qualification profile, with our project record in Kuwait and the region.</p>
+          <ul class="minis"><li><b>56</b><span>projects</span></li><li><b>1992</b><span>founded</span></li></ul>
+          <div class="btns">
+            <a class="btn btn-dark btn--sm" href="#qualification.pdf"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>Download qualification profile <span class="en">(PDF)</span></a>
+            <a class="btn btn-line btn--sm" href="#qualification-view">View profile</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9. SECTORS ================= -->
+<section class="section sectors" aria-labelledby="sec-title">
+  <div class="container">
+    <header class="head">
+      <div class="head__main">
+        <p class="eyebrow on-dark">Project sectors</p>
+        <h2 class="h2" id="sec-title" style="color:#FFFFFF">Six sectors,<br>proven in each</h2>
+      </div>
+      <p class="lead" style="color:#B5ADA6">From administrative and commercial buildings to cities and infrastructure. Sectors play automatically; hover one to hold it.</p>
+    </header>
+    <div class="secrow">
+      <a class="sec is-open" href="#sector-education" aria-current="true"><img src="../../images/79c0d71a6c95.webp" width="1199" height="675" alt="" loading="lazy" decoding="async"><span class="tint"></span><span class="grain"></span><span class="shade"></span><span class="pbar" aria-hidden="true"><i></i></span><span class="sec__idx" aria-hidden="true">01</span><span class="sec__v" aria-hidden="true">Educational &amp; health</span><span class="sec__body"><span class="c"><b>7</b><span>projects</span></span><span class="nm">Educational &amp; health</span><span class="go">View sector projects →</span></span></a>
+      <a class="sec" href="#sector-infrastructure" aria-current="false"><img src="../../images/19ab439e3e7c.webp" width="1200" height="675" alt="" loading="lazy" decoding="async"><span class="tint"></span><span class="grain"></span><span class="shade"></span><span class="pbar" aria-hidden="true"><i></i></span><span class="sec__idx" aria-hidden="true">02</span><span class="sec__v" aria-hidden="true">Planning &amp; infrastructure</span><span class="sec__body"><span class="c"><b>13</b><span>projects</span></span><span class="nm">Planning &amp; infrastructure</span><span class="go">View sector projects →</span></span></a>
+      <a class="sec" href="#sector-commercial" aria-current="false"><img src="../../images/0a9ee62337e9.webp" width="800" height="500" alt="" loading="lazy" decoding="async"><span class="tint"></span><span class="grain"></span><span class="shade"></span><span class="pbar" aria-hidden="true"><i></i></span><span class="sec__idx" aria-hidden="true">03</span><span class="sec__v" aria-hidden="true">Commercial</span><span class="sec__body"><span class="c"><b>12</b><span>projects</span></span><span class="nm">Commercial</span><span class="go">View sector projects →</span></span></a>
+      <a class="sec" href="#sector-sports" aria-current="false"><img src="../../images/59f52d4f92d5.webp" width="1200" height="675" alt="" loading="lazy" decoding="async"><span class="tint"></span><span class="grain"></span><span class="shade"></span><span class="pbar" aria-hidden="true"><i></i></span><span class="sec__idx" aria-hidden="true">04</span><span class="sec__v" aria-hidden="true">Entertainment &amp; sports</span><span class="sec__body"><span class="c"><b>7</b><span>projects</span></span><span class="nm">Entertainment &amp; sports</span><span class="go">View sector projects →</span></span></a>
+      <a class="sec" href="#sector-administrative" aria-current="false"><img src="../../images/c6edcc354257.webp" width="799" height="500" alt="" loading="lazy" decoding="async"><span class="tint"></span><span class="grain"></span><span class="shade"></span><span class="pbar" aria-hidden="true"><i></i></span><span class="sec__idx" aria-hidden="true">05</span><span class="sec__v" aria-hidden="true">Administrative</span><span class="sec__body"><span class="c"><b>12</b><span>projects</span></span><span class="nm">Administrative</span><span class="go">View sector projects →</span></span></a>
+      <a class="sec" href="#sector-residential" aria-current="false"><img src="../../images/525273cc1bfe.webp" width="1119" height="700" alt="" loading="lazy" decoding="async"><span class="tint"></span><span class="grain"></span><span class="shade"></span><span class="pbar" aria-hidden="true"><i></i></span><span class="sec__idx" aria-hidden="true">06</span><span class="sec__v" aria-hidden="true">Residential</span><span class="sec__body"><span class="c"><b>4</b><span>projects</span></span><span class="nm">Residential</span><span class="go">View sector projects →</span></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10. CTA + FORM ================= -->
+<section class="section cta" id="contact" aria-labelledby="cta-title">
+  <div class="cta__bg" aria-hidden="true">
+    <div class="ctaglow"></div>
+    <div class="floor"></div>
+    <svg class="wire" viewBox="0 -250 760 760">
+      <polygon class="g" pathLength="1" points="330,82 712.8,303 388.9,490 6.1,269"/>
+      <polygon pathLength="1" points="123.9,269 388.9,422 388.9,347.2 123.9,194.2"/>
+      <polygon pathLength="1" points="595,303 388.9,422 388.9,347.2 595,228.2"/>
+      <polygon pathLength="1" points="330,75.2 595,228.2 388.9,347.2 123.9,194.2"/>
+      <polyline class="f" pathLength="1" points="123.9,231.6 388.9,384.6 595,265.6"/>
+      <polygon pathLength="1" points="226.9,202.7 374.2,287.7 374.2,-65.9 226.9,-150.9"/>
+      <polygon pathLength="1" points="491.9,219.7 374.2,287.7 374.2,-65.9 491.9,-133.9"/>
+      <polygon class="k" pathLength="1" points="344.7,-218.9 491.9,-133.9 374.2,-65.9 226.9,-150.9"/>
+      <polyline class="f" pathLength="1" points="226.9,134.7 374.2,219.7 491.9,151.7"/>
+      <polyline class="f" pathLength="1" points="226.9,66.7 374.2,151.7 491.9,83.7"/>
+      <polyline class="f" pathLength="1" points="226.9,-1.3 374.2,83.7 491.9,15.7"/>
+      <polyline class="f" pathLength="1" points="226.9,-69.3 374.2,15.7 491.9,-52.3"/>
+      <polyline class="f" pathLength="1" points="263.7,223.9 263.7,-129.6"/>
+      <polyline class="f" pathLength="1" points="300.6,245.2 300.6,-108.4"/>
+      <polyline class="f" pathLength="1" points="337.4,266.4 337.4,-87.1"/>
+      <polyline class="f" pathLength="1" points="413.4,265 413.4,-88.6"/>
+      <polyline class="f" pathLength="1" points="452.7,242.4 452.7,-111.2"/>
+      <polygon class="k" pathLength="1" points="344.7,-250 410,-212 374.2,-191 309,-229"/>
+      <polyline class="k" pathLength="1" points="374.2,-191 374.2,-160"/>
+    </svg>
+    <div class="ctascan"></div>
+    <div class="cta__veil"></div>
+  </div>
+  <div class="container cta__grid">
+    <div class="cta__text">
+      <h2 id="cta-title">Have a project?<br><span>Let’s design or develop it together.</span></h2>
+      <p>Send us the details and one of our engineers will contact you.</p>
+      <div class="cta__links">
+        <a class="btn btn-glass" href="tel:+96522412378"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span class="en" dir="ltr">+965 2241 2378</span></a>
+        <a class="btn btn-glass" href="https://wa.me/96522412378" target="_blank" rel="noopener"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/></svg>WhatsApp<span class="sr-only"> (opens in a new tab)</span></a>
+      </div>
+    </div>
+    <div class="formcard">
+      <form class="form" action="#" method="post" novalidate>
+        <p class="form__title">Request a quote</p>
+        <div class="fgrid">
+          <div class="fld"><label for="f-name">Name <span class="req" aria-hidden="true">*</span></label><input id="f-name" name="name" class="field" type="text" autocomplete="name" required></div>
+          <div class="fld"><label for="f-phone">Mobile number <span class="req" aria-hidden="true">*</span></label><input id="f-phone" name="phone" class="field en" type="tel" autocomplete="tel" inputmode="tel" required dir="ltr" placeholder="+965" style="text-align:left"></div>
+          <div class="fld"><label for="f-type">Project type <span class="req" aria-hidden="true">*</span></label>
+            <select id="f-type" name="project_type" class="field" required><option value="">Choose a sector</option><option>Administrative projects</option><option>Commercial projects</option><option>Residential projects</option><option>Educational &amp; health projects</option><option>Entertainment &amp; sports projects</option><option>Planning, design &amp; infrastructure</option></select></div>
+          <div class="fld"><label for="f-svc">Service needed <span class="req" aria-hidden="true">*</span></label>
+            <select id="f-svc" name="service" class="field" required><option value="">Choose a service</option><option>Full design</option><option>Construction supervision</option><option>Project management</option><option>Developing an existing building</option><option>Other</option></select></div>
+        </div>
+        <div class="fld"><label for="f-msg">About the project (optional)</label><textarea id="f-msg" name="message" class="field" rows="3"></textarea></div>
+        <button class="btn btn-ember btn--lg" type="submit">Send request <svg class="fwd" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></button>
+        <p class="form__note">Demo: sending only shows the success message.</p>
+      </form>
+      <div class="sent" role="status">
+        <span class="ok" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>
+        <p class="t">Request received, thank you</p>
+        <p class="s">One of our engineers will contact you to discuss your project.</p>
+        <button type="button" data-form-reset>Send another request</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="asco-wrap" aria-hidden="true">
+    <div class="asco r1"><span>ASCO</span><span>ASCO</span><span>ASCO</span><span>ASCO</span><span>ASCO</span><span>ASCO</span><span>ASCO</span><span>ASCO</span></div>
+    <div class="asco r2"><span>ASCO</span><span>ASCO</span><span>ASCO</span><span>ASCO</span><span>ASCO</span><span>ASCO</span><span>ASCO</span><span>ASCO</span></div>
+  </div>
+  <div class="container footer__inner">
+    <div class="footer__cols">
+      <div class="footer__brand">
+        <img src="../../images/300eaf83ab4d.webp" width="1920" height="600" alt="Dar Al-Shaheen Consultants" loading="lazy">
+        <p>Since its inception in 1992, Dar Al-Shaheen Consultants has provided multi-disciplinary services to clients in Kuwait and the region.</p>
+        <div class="social">
+          <a href="https://www.linkedin.com/company/al-shaheen-consultants-asco/" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg></a>
+          <a href="https://www.instagram.com/alshaheen_consult/" target="_blank" rel="noopener" aria-label="Instagram (opens in a new tab)"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="https://www.facebook.com/AlShaheenCo" target="_blank" rel="noopener" aria-label="Facebook (opens in a new tab)"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4 1.7-4 4.3V10H7v4h3v7h4v-7h3l1-4h-4V8.6c0-.4.3-.6.7-.6z"/></svg></a>
+        </div>
+      </div>
+      <nav class="footer__col" aria-labelledby="f1"><h2 id="f1">Browse</h2><a class="flink" href="#about">About</a><a class="flink" href="#services">Services</a><a class="flink" href="#projects">Projects</a><a class="flink" href="#team">Team</a></nav>
+      <nav class="footer__col" aria-labelledby="f2"><h2 id="f2">More</h2><a class="flink" href="#capabilities">Capabilities</a><a class="flink" href="#qualification">Qualification</a><a class="flink" href="#news">News</a><a class="flink" href="#careers">Join us</a></nav>
+      <div class="footer__col"><h2>Contact</h2><a class="flink en" href="tel:+96522412378" dir="ltr">+965 2241 2378</a><a class="flink en" href="mailto:info@alshaheenco.com">info@alshaheenco.com</a><a class="btn btn-ember btn--sm" href="#contact" style="margin-top:8px">Request a quote</a></div>
+    </div>
+    <div class="footer__bottom">
+      <p>© <span data-year>2026</span> All rights are reserved to Dar Al Shaheen Consultants – Kuwait.</p>
+      <a class="flink" href="#main">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<nav class="mbar" aria-label="Quick contact">
+  <a href="tel:+96522412378"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call</a>
+  <a class="q" href="#contact">Request a quote</a>
+</nav>
+</body>
+</html>
