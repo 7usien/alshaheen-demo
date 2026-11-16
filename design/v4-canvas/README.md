@@ -1,7 +1,7 @@
 # Homepage v4 — design canvas snapshot
 
-Snapshot of the design canvas (review round 2 + nav hover update).
-Live canvas: https://claude.ai/artifact/7VeMMW4BN4j9yz5eJEDkxJ (version 1794851717-825f)
+Snapshot of the design canvas (review round 3: sticky bar, team carousel, CTA form).
+Live canvas: https://claude.ai/artifact/7VeMMW4BN4j9yz5eJEDkxJ (version 1794852805-de20)
 
 - `Main.dc.html` — desktop homepage (Arabic, RTL)
 - `Storyboard.dc.html` — hero effect storyboard (blueprint → real photo, depth, morph)
