@@ -209,7 +209,7 @@
       ['.svc, .svc-cta', 'img', .07], ['.filterbar', '', 0], ['.pj', 'img', .08],
       ['.founder', 'side', 0], ['.about__text > .eyebrow, .about__p, .values li, .badges, .about__text > .btn', '', .07],
       ['.step', '', .08], ['.stage', 'img', 0],
-      ['.team__text > *', '', .07], ['.team__stage', 'img', 0],
+      ['.team__text > *', '', .07], ['.team__stage', '', 0],
       ['.capcard', 'img', .12], ['.sec', 'img', .06],
       ['.cta__text > p, .cta__links', '', .1], ['.formcard', 'side', .1],
       ['.footer__cols > *', '', .08], ['.footer__bottom', '', 0]
@@ -260,6 +260,55 @@
     });
   });
 
-  /* ---------- 9. Year ---------- */
+  /* ---------- 9. CTA: interactive blueprint dot grid ---------- */
+  (function () {
+    var cv = $('.cta__dots'); if (!cv || !cv.getContext) return;
+    var sec = cv.closest('.cta'), ctx = cv.getContext('2d');
+    var W = 0, H = 0, dpr = 1, gap = 26, pts = [], inView = false, raf = 0;
+    var mx = -9999, my = -9999, tx = -9999, ty = -9999, energy = 0;
+    function build() {
+      var r = sec.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = r.width; H = r.height; gap = W < 640 ? 22 : 26;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      pts = [];
+      for (var y = gap / 2; y < H; y += gap) for (var x = gap / 2; x < W; x += gap) pts.push(x, y);
+      draw(performance.now());
+    }
+    function draw(t) {
+      ctx.clearRect(0, 0, W, H);
+      mx += (tx - mx) * 0.12; my += (ty - my) * 0.12;
+      var moving = !(still || motionPaused());
+      var R = 170;
+      for (var i = 0; i < pts.length; i += 2) {
+        var x = pts[i], y = pts[i + 1];
+        var dx = x - mx, dy = y - my, d = Math.sqrt(dx * dx + dy * dy);
+        var near = d < R ? 1 - d / R : 0; near = near * near * energy;
+        var wave = moving ? (Math.sin((x * 0.9 + y * 0.6) * 0.012 - t * 0.0016) + 1) / 2 : 0;
+        wave = Math.pow(wave, 6) * 0.9;
+        var k = Math.min(1, near + wave * 0.55);
+        var rad = 1.05 + near * 3.2 + wave * 1.1;
+        var px = x + (d > 0 ? dx / d : 0) * near * 6, py = y + (d > 0 ? dy / d : 0) * near * 6;
+        ctx.beginPath(); ctx.arc(px, py, rad, 0, 6.2832);
+        ctx.fillStyle = 'rgba(' + Math.round(140 + 78 * k) + ',' + Math.round(132 - 35 * k) + ',' + Math.round(126 - 93 * k) + ',' + (0.28 + 0.6 * k).toFixed(3) + ')';
+        ctx.fill();
+      }
+      if (moving && inView) raf = requestAnimationFrame(draw); else raf = 0;
+    }
+    function kick() { if (!raf && inView && !(still || motionPaused())) raf = requestAnimationFrame(draw); }
+    sec.addEventListener('pointermove', function (e) {
+      var r = sec.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top;
+      if (mx < -999) { mx = tx; my = ty; } energy = 1; kick();
+    });
+    sec.addEventListener('pointerleave', function () { tx = ty = -9999; energy = 0.0; });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { inView = en[0].isIntersecting; kick(); }).observe(sec);
+    else inView = true;
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 150); });
+    $$('[data-motion-toggle]').forEach(function (b) { b.addEventListener('click', function () { setTimeout(function () { kick(); if (motionPaused()) draw(performance.now()); }, 0); }); });
+    build();
+  })();
+
+  /* ---------- 10. Year ---------- */
   $$('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

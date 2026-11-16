@@ -21,5 +21,6 @@ is committed in `design/v4-canvas/`; use `git log -- design/v4-canvas` to list t
 | 4 | Design canvas snapshot: review round 5 | Smaller hero title, glass team badge, blueprint CTA background |
 | 5 | Design canvas: softer CTA wireframe and scan line, move team badge | Lighter wireframe and scan line, badge moved |
 | 6 (live demo) | v4 demo: scroll motion, 3-column team, photo CTA, tag fix | Fixed service tags and team columns; CTA uses a real project photo; scroll reveals, headline words, counters, scroll progress, parallax, card spotlight |
+| 7 (live demo) | v4 demo: light interactive CTA, smaller founder photo, full team badge | CTA becomes a light section with an interactive blueprint dot grid (cursor glow + idle wave) and a white form card; founder photo ~15% smaller; team badge no longer clipped; heading accent colours fixed |
 
 The plan and decisions are in `REDESIGN-PLAN.md`.
