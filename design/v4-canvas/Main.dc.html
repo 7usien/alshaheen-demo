@@ -173,31 +173,23 @@ a{color:#B04C14}a:hover{color:#8E3C0F}
 .sec img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.5) brightness(.62) contrast(1.1);transition:filter .7s,transform 1.2s cubic-bezier(.215,.61,.355,1)}
 .sec .vlab{position:absolute;bottom:28px;inset-inline-start:22px;writing-mode:vertical-rl;font-size:18px;font-weight:500;z-index:1;transition:opacity .4s}
 .sec .body{position:absolute;inset-inline:28px;bottom:28px;z-index:1;opacity:0;transform:translateY(16px);transition:opacity .5s .1s,transform .6s .1s cubic-bezier(.215,.61,.355,1)}
+.sec:hover{color:#FFFFFF}
 .sec.open{flex-grow:3.4}
-.sec.open img{filter:brightness(.85) contrast(1.06)}
+.sec.open img{filter:brightness(.85) contrast(1.06);transform:scale(1.05)}
 .sec.open .vlab{opacity:0}.sec.open .body{opacity:1;transform:none}
-.secrow:hover .sec.open:not(:hover){flex-grow:1}
-.secrow:hover .sec.open:not(:hover) img{filter:grayscale(.5) brightness(.62) contrast(1.1)}
-.secrow:hover .sec.open:not(:hover) .vlab{opacity:1}
-.secrow:hover .sec.open:not(:hover) .body{opacity:0}
-.sec:hover{flex-grow:3.4;color:#FFFFFF}
-.sec:hover img{filter:brightness(.85) contrast(1.06);transform:scale(1.05)}
-.sec:hover .vlab{opacity:0}
-.sec:hover .body{opacity:1;transform:none}
+.sec .pbar{position:absolute;top:30px;inset-inline:64px 28px;height:2px;border-radius:2px;background:rgba(255,255,255,.22);overflow:hidden;z-index:1;opacity:0;transition:opacity .4s}
+.sec .pbar i{position:absolute;inset:0;background:#F2A06B;transform-origin:right center;transform:scaleX(0)}
+.sec.open .pbar{opacity:1}
+.sec.open .pbar i{animation:secFill 3s linear both}
+.sec.hold .pbar i{animation:none;transform:scaleX(1)}
+@keyframes secFill{to{transform:scaleX(1)}}
 
 /* ---------- CTA animated gradient ---------- */
-.mesh{position:absolute;inset:-20%;background:
- radial-gradient(40% 50% at 20% 30%,rgba(218,97,33,.55),transparent 60%),
- radial-gradient(35% 45% at 80% 20%,rgba(120,38,12,.65),transparent 60%),
- radial-gradient(45% 55% at 70% 80%,rgba(242,160,107,.35),transparent 60%),
- radial-gradient(40% 50% at 15% 85%,rgba(60,42,96,.45),transparent 60%),
- #141312;filter:blur(30px) saturate(120%);animation:meshMove 18s ease-in-out infinite alternate}
-@keyframes meshMove{0%{transform:translate(0,0) rotate(0deg) scale(1)}50%{transform:translate(-4%,3%) rotate(8deg) scale(1.08)}100%{transform:translate(4%,-3%) rotate(-6deg) scale(1.04)}}
-.blob{position:absolute;border-radius:50%;filter:blur(60px);mix-blend-mode:screen}
-.blob.b1{width:520px;height:520px;background:rgba(218,97,33,.45);animation:drift1 16s ease-in-out infinite alternate}
-.blob.b2{width:420px;height:420px;background:rgba(180,51,28,.40);animation:drift2 20s ease-in-out infinite alternate}
-@keyframes drift1{from{transform:translate(0,0)}to{transform:translate(-260px,140px)}}
-@keyframes drift2{from{transform:translate(0,0)}to{transform:translate(220px,-120px)}}
+.ctaglow{position:absolute;width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(218,97,33,.40) 0%,rgba(176,76,20,.16) 42%,rgba(176,76,20,0) 70%);animation:glowDrift 14s ease-in-out infinite alternate}
+@keyframes glowDrift{from{transform:translate(0,0) scale(1)}to{transform:translate(-140px,70px) scale(1.12)}}
+.ctaarc{position:absolute;border-radius:50%;border:1px solid rgba(242,160,107,.16);animation:arcPulse 9s ease-in-out infinite alternate}
+.ctaarc.a2{border-color:rgba(242,160,107,.09);animation-delay:1.5s}
+@keyframes arcPulse{from{transform:scale(1);opacity:.6}to{transform:scale(1.06);opacity:1}}
 .field{background:rgba(14,13,12,.55);border:1px solid rgba(255,255,255,.16);color:#FFFFFF;border-radius:14px;height:52px;padding:0 16px;font:inherit;font-size:15px;width:100%;transition:border-color .3s,background .3s}
 .field:hover{border-color:rgba(255,255,255,.3)}
 .field:focus{outline:2px solid #F2A06B;outline-offset:2px;border-color:transparent;background:rgba(14,13,12,.75)}
@@ -232,7 +224,7 @@ textarea.field{height:auto;min-height:110px;padding:14px 16px;resize:vertical;li
  .bar .ctatop{display:none}
 }
 @media (prefers-reduced-motion: reduce){
- .slide,.slide img,.slide .bpgrid,.cap,.prog,.scan,.marq,.asco,.si,.st,.vcol,.mesh,.blob,.floaty,.floaty2,.inA,.inB,.inA img,.inB img{animation:none}
+ .slide,.slide img,.slide .bpgrid,.cap,.prog,.scan,.marq,.asco,.si,.st,.vcol,.ctaglow,.ctaarc,.floaty,.floaty2,.inA,.inB,.inA img,.inB img{animation:none}
  .slide{opacity:0}.slide.d0{opacity:1}.slide .bpgrid{opacity:0}.cap{opacity:0}.cap.d0{opacity:1}
  .navlink .t{transition:none}.navlink:hover .t{transform:none}
 }
@@ -573,14 +565,20 @@ textarea.field{height:auto;min-height:110px;padding:14px 16px;resize:vertical;li
       <p style="margin: 0; color: #B04C14; font-size: 14px; font-weight: 500">فريق العمل</p>
       <h2 id="team-title" style="margin: 0; font-weight: 600; font-size: clamp(30px, 3.6vw, 52px); line-height: 1.2; color: #2A2929">مهندسون يقودون مشاريعكم</h2>
       <p style="margin: 0; color: #5E5853; font-size: 17px; font-weight: 300; line-height: 1.85">خبرات في العمارة والإنشاء والميكانيك والكهرباء وإدارة المشاريع، تعمل كفريق واحد على كل مشروع.</p>
-      <div style="display: flex; align-items: baseline; gap: 12px; padding: 18px 0; border-block: 1px solid rgba(42,41,41,.12)">
-        <span style="font-size: 56px; font-weight: 600; line-height: 1; color: #B04C14">30</span>
-        <span style="font-size: 16px; color: #5E5853">عضواً في الفريق</span>
-      </div>
       <a class="btn-dark" href="#team-page" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; height: 54px; padding: 0 26px; border-radius: 999px; font-weight: 500; font-size: 16px">تعرّف على الفريق كاملاً <span aria-hidden="true">←</span></a>
       <p style="margin: 0; font-size: 13px; color: #5E5853">مرّر فوق الفريق لإيقاف الحركة.</p>
     </div>
-    <div class="vwrap" style="flex: 1 1 640px; min-width: 0">
+    <div style="position: relative; flex: 1 1 640px; min-width: 0">
+    <div class="floaty" style="position: absolute; z-index: 3; right: -22px; top: 42%; padding: 18px 22px; border-radius: 22px; background: #141312; color: #FFFFFF; box-shadow: 0 30px 60px -24px rgba(20,19,18,.6); display: flex; flex-direction: column; gap: 12px; min-width: 200px">
+      <span style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 46px; font-weight: 600; line-height: 1; color: #F2A06B">30</span><span style="font-size: 14px; color: #D9D2CC">عضواً في<br>فريق العمل</span></span>
+      <span aria-hidden="true" style="display: flex; align-items: center">
+        <img src="/_blob/901325c8bd8a88ded011c338b466f993" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: top; background: #3A2A20; border: 2px solid #141312">
+        <img src="/_blob/4c1d01184b84432bc60accba5cfe0f65" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: top; background: #3A2A20; border: 2px solid #141312; margin-inline-start: -10px">
+        <img src="/_blob/30368e427179b2f30f991862a3075f1f" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: top; background: #3A2A20; border: 2px solid #141312; margin-inline-start: -10px">
+        <span class="en" style="width: 34px; height: 34px; border-radius: 50%; background: #DA6121; border: 2px solid #141312; margin-inline-start: -10px; display: grid; place-items: center; font-size: 11px; font-weight: 600">+27</span>
+      </span>
+    </div>
+    <div class="vwrap">
       <ul class="vcol vup">
         <sc-for list="{{col1}}" as="m" hint-placeholder-count="6">
           <li class="tm">
@@ -615,6 +613,7 @@ textarea.field{height:auto;min-height:110px;padding:14px 16px;resize:vertical;li
         </sc-for>
       </ul>
     </div>
+    </div>
   </div>
 </section>
 
@@ -629,9 +628,8 @@ textarea.field{height:auto;min-height:110px;padding:14px 16px;resize:vertical;li
       <p style="margin: 0; max-width: 420px; color: #5E5853; font-size: 17px; font-weight: 300; line-height: 1.85">ملفان محدّثان لعام 2026، لتقييم المكتب في المناقصات والتأهيل المسبق.</p>
     </header>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 24px">
-      <article class="capcard" style="position: relative; overflow: hidden; border-radius: 32px; background: #141312; color: #FFFFFF; padding: 40px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; min-height: 420px">
-        <div aria-hidden="true" class="orb" style="width: 340px; height: 340px; background: rgba(218,97,33,.45); bottom: -120px; left: -80px"></div>
-        <div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(242,160,107,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(242,160,107,.07) 1px, transparent 1px); background-size: 40px 40px"></div>
+      <article class="capcard" style="position: relative; overflow: hidden; border-radius: 32px; background: linear-gradient(150deg, #2E2925 0%, #1F1C1A 100%); color: #FFFFFF; padding: 40px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; min-height: 420px; border: 1px solid rgba(255,255,255,.06)">
+        <div aria-hidden="true" style="position: absolute; width: 300px; height: 300px; left: 10px; top: 50%; margin-top: -150px; border-radius: 50%; background: radial-gradient(circle, rgba(218,97,33,.22), rgba(218,97,33,0) 70%)"></div>
         <div style="position: relative; flex: 0 0 220px; display: grid; place-items: center; padding: 10px 0 10px 30px">
           <div class="book">
             <div class="cover" style="background: linear-gradient(160deg, #2A2522, #141312); border: 1px solid rgba(242,160,107,.35)">
@@ -696,13 +694,14 @@ textarea.field{height:auto;min-height:110px;padding:14px 16px;resize:vertical;li
         <p style="margin: 0; color: #F2A06B; font-size: 14px; font-weight: 500">قطاعات المشاريع</p>
         <h2 id="sec-title" style="margin: 0; font-weight: 600; font-size: clamp(30px, 3.6vw, 52px); line-height: 1.2">ستة قطاعات،<br>خبرة في كل منها</h2>
       </div>
-      <p style="margin: 0; max-width: 420px; color: #B5ADA6; font-size: 16px; font-weight: 300; line-height: 1.85">من المباني الإدارية والتجارية إلى المدن والبنية التحتية. مرّر على أي قطاع لاستعراض مشاريعه.</p>
+      <p style="margin: 0; max-width: 420px; color: #B5ADA6; font-size: 16px; font-weight: 300; line-height: 1.85">من المباني الإدارية والتجارية إلى المدن والبنية التحتية. القطاعات تُعرض تلقائياً، ومرّر على أي قطاع لإيقافه عنده.</p>
     </header>
     <div class="secrow">
       <sc-for list="{{sectors}}" as="sec" hint-placeholder-count="6">
-        <a class="sec {{sec.open}}" href="#sector">
+        <a class="sec {{sec.open}}" href="#sector" onMouseEnter="{{sec.enter}}" onMouseLeave="{{secLeave}}" onFocus="{{sec.enter}}" onBlur="{{secLeave}}">
           <img src="{{sec.img}}" alt="">
           <span class="tint"></span><span class="grain"></span><span class="shade"></span>
+          <span class="pbar" aria-hidden="true"><i></i></span>
           <span class="vlab">{{sec.name}}</span>
           <span class="en" style="position: absolute; top: 22px; inset-inline-start: 22px; z-index: 1; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.85)">{{sec.idx}}</span>
           <div class="body" style="display: flex; flex-direction: column; gap: 10px">
@@ -718,62 +717,37 @@ textarea.field{height:auto;min-height:110px;padding:14px 16px;resize:vertical;li
 
 <!-- ================= 10. CTA + FORM ================= -->
 <section id="contact" aria-labelledby="cta-title" style="position: relative; overflow: hidden; color: #FFFFFF; padding: 112px 0; background: #141312; isolation: isolate">
-  <div aria-hidden="true" style="position: absolute; inset: 0; overflow: hidden; z-index: -1">
-    <div class="mesh"></div>
-    <div class="blob b1" style="top: -120px; right: -80px"></div>
-    <div class="blob b2" style="bottom: -120px; left: 10%"></div>
-    <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 48px 48px"></div>
-    <div style="position: absolute; inset: 0; background: rgba(14,13,12,.35)"></div>
+  <div aria-hidden="true" style="position: absolute; inset: 0; overflow: hidden; z-index: -1; background: linear-gradient(160deg, #1B1917 0%, #141312 55%, #100F0E 100%)">
+    <div class="ctaglow" style="top: -300px; right: -220px"></div>
+    <div class="ctaarc" style="width: 900px; height: 900px; left: -420px; bottom: -520px"></div>
+    <div class="ctaarc a2" style="width: 1200px; height: 1200px; left: -570px; bottom: -670px"></div>
   </div>
-  <div style="position: relative; max-width: 1360px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start">
-    <div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 22px; padding-top: 12px">
-      <h2 id="cta-title" style="margin: 0; font-weight: 600; font-size: clamp(36px, 4.4vw, 62px); line-height: 1.15">لديك مشروع؟<br><span style="color: #F5B88C">لنصمّمه أو نطوّره معاً.</span></h2>
-      <p style="margin: 0; color: #E9E3DE; font-size: 18px; font-weight: 300; line-height: 1.85; max-width: 480px">سواء كان مبنى جديداً أو تطويراً لمبنى قائم، أخبرنا بالتفاصيل ويتواصل معك أحد مهندسينا لتقديم عرض مناسب.</p>
-      <ul style="list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; font-size: 15px">
-        <li style="display: flex; align-items: center; gap: 12px"><span style="width: 40px; height: 40px; border-radius: 12px; background: rgba(255,255,255,.08); display: grid; place-items: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span><a class="en" href="tel:+96522412378" dir="ltr" style="color: #FFFFFF; text-decoration: none">+965 2241 2378</a></li>
-        <li style="display: flex; align-items: center; gap: 12px"><span style="width: 40px; height: 40px; border-radius: 12px; background: rgba(255,255,255,.08); display: grid; place-items: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span><a class="en" href="mailto:info@alshaheenco.com" style="color: #FFFFFF; text-decoration: none">info@alshaheenco.com</a></li>
-        <li style="display: flex; align-items: center; gap: 12px"><span style="width: 40px; height: 40px; border-radius: 12px; background: rgba(255,255,255,.08); display: grid; place-items: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span style="color: #E9E3DE">الأحد – الخميس، 8:00 ص – 4:00 م</span></li>
-        <li style="display: flex; align-items: center; gap: 12px"><span style="width: 40px; height: 40px; border-radius: 12px; background: rgba(255,255,255,.08); display: grid; place-items: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></span><span style="color: #E9E3DE">الكويت، شارع الخليج العربي</span></li>
-      </ul>
-      <a class="btn-glass" href="#whatsapp" style="align-self: flex-start; margin-top: 8px; display: inline-flex; align-items: center; gap: 10px; height: 54px; padding: 0 22px; border-radius: 999px; font-weight: 500"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"></path></svg>راسلنا عبر واتساب</a>
+  <div style="position: relative; max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
+    <div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+      <h2 id="cta-title" style="margin: 0; font-weight: 600; font-size: clamp(34px, 4vw, 56px); line-height: 1.2">لديك مشروع؟<br><span style="color: #F5B88C">لنصمّمه أو نطوّره معاً.</span></h2>
+      <p style="margin: 0; color: #D9D2CC; font-size: 18px; font-weight: 300; line-height: 1.8; max-width: 420px">أرسل التفاصيل، ويتواصل معك أحد مهندسينا.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; padding-top: 8px">
+        <a class="btn-glass" href="tel:+96522412378" style="display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 20px; border-radius: 999px; font-weight: 500"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg><span class="en" dir="ltr">+965 2241 2378</span></a>
+        <a class="btn-glass" href="#whatsapp" style="display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 20px; border-radius: 999px; font-weight: 500"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A06B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"></path></svg>واتساب</a>
+      </div>
     </div>
 
-    <div style="flex: 1 1 600px; min-width: 0; border-radius: 32px; border: 1px solid rgba(255,255,255,.14); background: rgba(20,19,18,.62); backdrop-filter: blur(24px); padding: 36px; box-shadow: 0 40px 80px -40px rgba(0,0,0,.8)">
+    <div style="flex: 1 1 560px; min-width: 0; border-radius: 32px; border: 1px solid rgba(255,255,255,.12); background: rgba(30,28,27,.72); backdrop-filter: blur(20px); padding: 36px; box-shadow: 0 40px 80px -40px rgba(0,0,0,.8)">
       <sc-if value="{{notSent}}" hint-placeholder-val="{{true}}">
-        <form onSubmit="{{submit}}" style="display: flex; flex-direction: column; gap: 22px">
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
-            <p style="margin: 0; font-size: 24px; font-weight: 600">اطلب عرض سعر</p>
-            <span style="font-size: 12px; color: #CFC7C0">الحقول المعلّمة بـ * مطلوبة</span>
-          </div>
-          <div class="fgrid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
-            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-name">الاسم الكامل *</label><input id="f-name" class="field" type="text" autocomplete="name" required></div>
-            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-org">الجهة أو الشركة</label><input id="f-org" class="field" type="text" autocomplete="organization"></div>
-            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-phone">رقم الجوال *</label><input id="f-phone" class="field en" type="tel" autocomplete="tel" inputmode="tel" required dir="ltr" placeholder="+965" style="text-align: right"></div>
-            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-mail">البريد الإلكتروني</label><input id="f-mail" class="field en" type="email" autocomplete="email" dir="ltr" style="text-align: right"></div>
-            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-type">نوع المشروع *</label>
+        <form onSubmit="{{submit}}" style="display: flex; flex-direction: column; gap: 18px">
+          <p style="margin: 0 0 4px; font-size: 22px; font-weight: 600">اطلب عرض سعر</p>
+          <div class="fgrid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-name">الاسم</label><input id="f-name" class="field" type="text" autocomplete="name" required></div>
+            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-phone">رقم الجوال</label><input id="f-phone" class="field en" type="tel" autocomplete="tel" inputmode="tel" required dir="ltr" placeholder="+965" style="text-align: right"></div>
+            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-type">نوع المشروع</label>
               <select id="f-type" class="field" required><option value="">اختر القطاع</option><option>مشاريع إدارية</option><option>مشاريع تجارية</option><option>مشاريع سكنية</option><option>مشاريع تعليمية وصحية</option><option>مشاريع ترفيهية ورياضية</option><option>تخطيط وتصميم وبنية تحتية</option></select>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-svc">الخدمة المطلوبة *</label>
-              <select id="f-svc" class="field" required><option value="">اختر الخدمة</option><option>تصميم متكامل</option><option>تصميم معماري</option><option>تصميم إنشائي</option><option>تصميم ميكانيكي وكهربائي</option><option>إشراف على التنفيذ</option><option>إدارة مشروع</option><option>دراسة جدوى أو تخطيط</option><option>تطوير أو تأهيل مبنى قائم</option></select>
+            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-svc">الخدمة المطلوبة</label>
+              <select id="f-svc" class="field" required><option value="">اختر الخدمة</option><option>تصميم متكامل</option><option>إشراف على التنفيذ</option><option>إدارة مشروع</option><option>تطوير مبنى قائم</option><option>أخرى</option></select>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-loc">موقع المشروع</label><input id="f-loc" class="field" type="text" placeholder="المنطقة أو المدينة"></div>
-            <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-area">المساحة التقريبية (م²)</label><input id="f-area" class="field en" type="number" inputmode="numeric" min="0" dir="ltr" style="text-align: right"></div>
           </div>
-          <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px">
-            <legend class="fl" style="padding: 0; margin-bottom: 10px">مرحلة المشروع الحالية</legend>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px">
-              <sc-for list="{{stages}}" as="sg" hint-placeholder-count="4">
-                <label class="opt" style="background: {{sg.bg}}; border-color: {{sg.border}}; color: {{sg.fg}}">
-                  <input type="radio" name="stage" value="{{sg.label}}" checked="{{sg.on}}" onChange="{{sg.pick}}" style="position: absolute; opacity: 0; width: 1px; height: 1px">{{sg.label}}
-                </label>
-              </sc-for>
-            </div>
-          </fieldset>
-          <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-msg">تفاصيل المشروع</label><textarea id="f-msg" class="field" rows="4" placeholder="أخبرنا باختصار عن المشروع ومتطلباتك والموعد المتوقع للبدء"></textarea></div>
-          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
-            <label style="display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: #D9D2CC; cursor: pointer; min-height: 44px"><input type="checkbox" style="width: 18px; height: 18px; accent-color: #DA6121">أفضّل التواصل عبر واتساب</label>
-            <button class="btn-ember" type="submit" style="height: 58px; padding: 0 40px; border: 0; border-radius: 999px; font-family: Alexandria, sans-serif; font-size: 17px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 10px">أرسل الطلب <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M11 6l-6 6 6 6"></path></svg></button>
-          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px"><label class="fl" for="f-msg">نبذة عن المشروع (اختياري)</label><textarea id="f-msg" class="field" rows="3"></textarea></div>
+          <button class="btn-ember" type="submit" style="margin-top: 4px; height: 58px; border: 0; border-radius: 999px; font-family: Alexandria, sans-serif; font-size: 17px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px">أرسل الطلب <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M11 6l-6 6 6 6"></path></svg></button>
         </form>
       </sc-if>
       <sc-if value="{{sent}}" hint-placeholder-val="{{false}}">
@@ -828,7 +802,20 @@ textarea.field{height:auto;min-height:110px;padding:14px 16px;resize:vertical;li
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { filter: 'all', step: 0, sent: false, stage: 0, tick: 0 };
+    this.state = { filter: 'all', step: 0, sent: false, tick: 0, sec: 0, secHover: false };
+  }
+  componentDidMount() {
+    var self = this;
+    var reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce) return;
+    this._secTimer = setInterval(function () {
+      if (self.state.secHover) return;
+      self.setState({ sec: (self.state.sec + 1) % 6 });
+    }, 3000);
+  }
+  componentWillUnmount() {
+    if (this._secTimer) clearInterval(this._secTimer);
   }
   renderVals() {
     var self = this;
@@ -911,13 +898,6 @@ class Component extends DCLogic {
     ].map(function (m) { return Object.assign({}, m, { alt: m.name + '، ' + m.role }); });
     var pickCol = function (idx) { var c = idx.map(function (i) { return team[i]; }); return c.concat(c); };
 
-    var STG = ['فكرة أولية', 'مرحلة التصميم', 'جاهز للتنفيذ', 'تطوير مبنى قائم'];
-    var stages = STG.map(function (l, i) {
-      var on = i === self.state.stage;
-      return { label: l, on: on, bg: on ? 'rgba(242,160,107,.16)' : 'transparent', border: on ? '#F2A06B' : 'rgba(255,255,255,.2)', fg: on ? '#FFFFFF' : '#D9D2CC',
-        pick: function () { self.setState({ stage: i }); } };
-    });
-
     var clients = ['وزارة الأشغال العامة', 'بلدية الكويت', 'المؤسسة العامة للرعاية السكنية', 'وزارة التربية', 'وزارة الصحة', 'الهيئة العامة للرياضة'];
 
     return {
@@ -927,15 +907,19 @@ class Component extends DCLogic {
       chips: chips, shown: shown,
       steps: steps, animKey: animKey, stepImg: ST[step].img, stepAlt: ST[step].alt, stepTitle: ST[step].title, stepNum: '0' + (step + 1),
       col1: pickCol([0, 3, 6]), col2: pickCol([1, 4, 7]), col3: pickCol([2, 5, 0]),
-      stages: stages,
       sectors: [
-        { name: 'تعليمية وصحية', count: 7, img: IMG.algonquin, open: 'open' },
-        { name: 'تخطيط وبنية تحتية', count: 13, img: IMG.mutlaa, open: '' },
-        { name: 'تجارية', count: 12, img: IMG.khafji, open: '' },
-        { name: 'ترفيهية ورياضية', count: 7, img: IMG.khateeb, open: '' },
-        { name: 'إدارية', count: 12, img: IMG.offices, open: '' },
-        { name: 'سكنية', count: 4, img: IMG.resi, open: '' }
-      ].map(function (s, i) { return Object.assign({}, s, { idx: '0' + (i + 1) }); }),
+        { name: 'تعليمية وصحية', count: 7, img: IMG.algonquin },
+        { name: 'تخطيط وبنية تحتية', count: 13, img: IMG.mutlaa },
+        { name: 'تجارية', count: 12, img: IMG.khafji },
+        { name: 'ترفيهية ورياضية', count: 7, img: IMG.khateeb },
+        { name: 'إدارية', count: 12, img: IMG.offices },
+        { name: 'سكنية', count: 4, img: IMG.resi }
+      ].map(function (s, i) {
+        var on = i === self.state.sec;
+        return Object.assign({}, s, { idx: '0' + (i + 1), open: on ? (self.state.secHover ? 'open hold' : 'open') : '',
+          enter: function () { self.setState({ sec: i, secHover: true }); } });
+      }),
+      secLeave: function () { self.setState({ secHover: false }); },
       notSent: !this.state.sent, sent: this.state.sent,
       submit: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ sent: true }); },
       reset: function () { self.setState({ sent: false }); }
